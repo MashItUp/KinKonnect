@@ -1,0 +1,20 @@
+body {
+	background-image: url("../img/root_homepage.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: center; 
+	background-color: #a9d1b7;
+
+}
+
+h1 {
+	font-size: 90px;
+}
+
+.site-heading {
+	font-size: 30px;
+	color: #ffffff;
+	text-align: center;
+	margin-top: 50%;
+
+}
