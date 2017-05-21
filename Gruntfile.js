@@ -7,7 +7,7 @@ module.exports = function (grunt) {
                     outputStyle: 'compressed'
                 },
                 files: {
-                    'css/style.css': 'css/style.scss'
+                    'css/main.css': 'css/main.scss'
                 }
             }
         },
