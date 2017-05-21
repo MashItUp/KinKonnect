@@ -1,13 +1,31 @@
-$primary-color: green;
+$primary-color: #f5ecd1;
+$home-font: 'Maven Pro', sans-serif;
 
-h1 {
-	color: $primary-color;
+body {
+	background-image:	   url('../img/elephantbg.jpg');
+	background-position:   center center;
+	background-repeat:     no-repeat;
+	background-attachment: fixed;
+	background-size:       cover;
+
 }
 
-p {
+h1 {
+	font-family: $home-font;
 	color: $primary-color;
+	text-align: center;
+	font-size: 5em;
+	margin-top: 31%;
+
 }
 
 .subheading {
+	font-family: $home-font;
+	color: $primary-color;
+	text-align: center;
+	font-size: 2em;
+}
+
+p {
 	color: $primary-color;
 }
