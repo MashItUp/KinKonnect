@@ -1,3 +1,4 @@
+
 body {
     background-image: url("../img/elephantbg.jpg");
     background-position: center center;
@@ -69,3 +70,4 @@ div.aboutContent {
     opacity: 0.6;
     filter: alpha(opacity=60)
 }
+
