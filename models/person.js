@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var People = sequelize.define("People", {
+    var Person = sequelize.define("Person", {
             first_name:
                 {
                     type:DataTypes.STRING,
@@ -58,7 +58,10 @@ module.exports = function(sequelize, DataTypes) {
                     type:DataTypes.DATE,
                     allowNull: false
                 }
+        },
+        {
+            freezeTableName: true
         }
     );
-    return People;
+    return Person;
 };
