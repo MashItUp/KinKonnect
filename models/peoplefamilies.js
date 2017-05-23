@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Personfamily = sequelize.define("Personfamily",
+    var Personfamilies = sequelize.define("Personfamilies",
         {},
         {
             classMethods:
@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
                     {
                         // Using additional options like CASCADE etc for demonstration
                         // Can also simply do Task.belongsTo(models.User);
-                        Personfamily.belongsTo(models.Person,
+                        Personfamilies.belongsTo(models.People,
                             {
                                 foreignKey:
                                     {
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
                                     },
                                 onDelete: 'cascade', hooks:true
                             });
-                        Personfamily.belongsTo(models.Family,
+                        Personfamilies.belongsTo(models.Families,
                             {
                                 foreignKey:
                                     {
@@ -28,5 +28,5 @@ module.exports = function(sequelize, DataTypes) {
                 }
         }
     );
-    return Personfamily;
+    return Personfamilies;
 };

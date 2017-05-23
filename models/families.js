@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Family = sequelize.define("Family", {
+    var Families = sequelize.define("Families", {
             name:
                 {
                     type:DataTypes.STRING,
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
                 {
                     // Using additional options like CASCADE etc for demonstration
                     // Can also simply do Task.belongsTo(models.User);
-                    Family.belongsTo(models.Person,
+                    Families.belongsTo(models.People,
                         {
                             foreignKey:
                                 {
@@ -30,5 +30,5 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     );
-    return Family;
+    return Families;
 };
