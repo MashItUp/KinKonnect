@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e84a525f-cc2d-432a-947a-9493ce8103e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/family.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/person.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/personfamily.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/families.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/people.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/peoplefamilies.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e84a525f-cc2d-432a-947a-9493ce8103e1" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +55,7 @@
       <file leaf-file-name="person.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/person.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
+            <state relative-caret-position="146">
               <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
               <caret line="1" column="41" lean-forward="false" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
               <caret line="65" column="17" lean-forward="false" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
@@ -374,12 +366,12 @@
       <workItem from="1495461650861" duration="3000" />
       <workItem from="1495488673394" duration="6253000" />
       <workItem from="1495509802275" duration="2039000" />
-      <workItem from="1495553765844" duration="1344000" />
+      <workItem from="1495553765844" duration="1555000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9734000" />
+    <option name="totallyTimeSpent" value="9945000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="79" y="48" width="1201" height="680" extended-state="0" />
@@ -713,7 +705,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/person.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
+        <state relative-caret-position="146">
           <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
           <caret line="1" column="41" lean-forward="false" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
           <caret line="65" column="17" lean-forward="false" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
