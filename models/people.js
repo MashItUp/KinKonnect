@@ -1,30 +1,30 @@
 module.exports = function(sequelize, DataTypes) {
-    var Person = sequelize.define("Person", {
+    var People = sequelize.define("People", {
             first_name:
                 {
-                      type:DataTypes.STRING,
-                      allowNull: false,
-                      validate:
-                          {
+                    type:DataTypes.STRING,
+                    allowNull: false,
+                    validate:
+                        {
                             len:
                                 {
                                     args: [1, 160],
                                     msg: "Please enter a first name."
                                 }
-                          }
+                        }
                 },
             last_name:
                 {
-                      type:DataTypes.STRING,
-                      allowNull: false,
-                      validate:
-                          {
+                    type:DataTypes.STRING,
+                    allowNull: false,
+                    validate:
+                        {
                             len:
-                               {
-                                   args: [1, 160],
-                                   msg: "Please enter a last name."
-                               }
-                          }
+                                {
+                                    args: [1, 160],
+                                    msg: "Please enter a last name."
+                                }
+                        }
                 },
             email:
                 {
@@ -60,5 +60,5 @@ module.exports = function(sequelize, DataTypes) {
                 }
         }
     );
-    return Person;
+    return People;
 };
