@@ -1,5 +1,7 @@
 // config/passport.js
 
+var bCrypt   = require('bcrypt-nodejs');
+
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
 
@@ -54,7 +56,7 @@ module.exports = function(passport) {
                 process.nextTick(function() {
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
-                    db.Person.findOne({ where: {'User.email' :  email }}).then(function(err, user) {
+                    db.Person.findOne({ where: {'email' :  email }}).then(function(err, user) {
                         // if there are any errors, return the error
                         if (err)
                             return done(err);
