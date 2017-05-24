@@ -4,7 +4,8 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var User            = require('../models/person');
+//var User            = require('../models/person');
+var db = require("../models");
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -39,7 +40,7 @@ module.exports = function(passport) {
             // by default, local strategy uses username and password, we will override with email
             firstNameField : 'fname',
             lastNameField  : 'lname',
-            emailField : 'email',
+            usernameField : 'email',
             passwordField : 'password',
             dobField : 'dob',
             passReqToCallback : true // allows us to pass back the entire request to the callback
@@ -53,7 +54,7 @@ module.exports = function(passport) {
                 process.nextTick(function() {
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
-                    User.findOne({ where: {'User.email' :  email }}).then(function(err, user) {
+                    db.Person.findOne({ where: {'User.email' :  email }}).then(function(err, user) {
                         // if there are any errors, return the error
                         if (err)
                             return done(err);
@@ -64,7 +65,7 @@ module.exports = function(passport) {
                         }
                         else
                         {
-                            User.create({
+                            db.Person.create({
                                 first_name: req.body.fname,
                                 last_name: req.body.lname,
                                 email: email,
