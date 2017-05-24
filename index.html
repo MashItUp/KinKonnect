@@ -5,7 +5,7 @@
     <title>KinKonnect</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="./img/favicon.jpeg">
+    <link rel="icon" href="public/assets/img/favicon.jpeg">
     <!-- Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
@@ -23,9 +23,10 @@
 
     <!-- CSS Animation CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    
+
     <!-- Link CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+
 
 
 </head>
@@ -96,16 +97,24 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="newname" class="form-control-label">Name</label>
-                            <input type="text" class="form-control" id="newname">
+                            <label for="fname" class="form-control-label">First Name</label>
+                            <input type="text" class="form-control" id="fname">
                         </div>
                         <div class="form-group">
-                            <label for="newusername" class="form-control-label">Username</label>
-                            <input class="form-control" id="newusername">
+                            <label for="lname" class="form-control-label">Last Name</label>
+                            <input class="form-control" id="lname">
                         </div>
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">Email</label>
+                            <input class="form-control" id="email" placeholder="username@domain.com">
+                        </div> 
                         <div class="form-group">
                             <label for="newpassword" class="form-control-label">Password</label>
                             <input class="form-control" id="newpassword">
+                        </div> 
+                        <div class="form-group">
+                            <label for="dob" class="form-control-label">Password</label>
+                            <input class="form-control" id="dob" placeholder="DD-MM-YYYY">
                         </div>
                     </form>
                 </div>
@@ -140,7 +149,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="public/js/app.js"></script>
 </body>
 
 </html>
