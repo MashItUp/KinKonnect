@@ -12,10 +12,14 @@ var session      = require('express-session');
 // Set up for the Express App
 var app = express();
 
+app.set('view engine', 'ejs'); // set up ejs for templating
+
 // Needed for Heroku deployment
 const PORT = process.env.PORT || 3000;
 // Requires models js files
 var db = require("./models");
+
+require('./config/passport')(passport); // pass passport for configuration
 
 //  { extended: true } allows for qs library use for parsing (instead of querystring)
 app.use(morgan('dev')); // log every request to the console
@@ -43,7 +47,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-//require("./routes/user-api-routes.js")(app, passport);
+require("./routes/user-api-routes.js")(app, passport);
 
 
 db.sequelize.sync({ force: true }).then(function() {

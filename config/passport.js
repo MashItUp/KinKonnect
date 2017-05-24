@@ -8,7 +8,6 @@ var User            = require('../models/person');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
-
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -38,16 +37,19 @@ module.exports = function(passport) {
     passport.use('local-signup', new LocalStrategy(
         {
             // by default, local strategy uses username and password, we will override with email
-            firstNameField : 'first_name',
-            lastNameField  : 'last_name',
+            firstNameField : 'fname',
+            lastNameField  : 'lname',
             emailField : 'email',
             passwordField : 'password',
             dobField : 'dob',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
             function(req, email, password, done) {
+                console.log("got to localstrategy");
+                //console.log("email: ", email);
                 // asynchronous
                 // User.findOne wont fire unless data is sent back
+                //console.log("got to Localstrategy");
                 process.nextTick(function() {
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
@@ -66,7 +68,7 @@ module.exports = function(passport) {
                                 first_name: req.body.fname,
                                 last_name: req.body.lname,
                                 email: email,
-                                password: User.generateHash(password),
+                                password: createHash(password),
                                 dob: req.body.dob
                             }).then(function (dbPerson) {
                                 // We have access to the new person as an argument inside of the callback function
@@ -108,11 +110,20 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('loginMessage', 'Invalid Email or Password.')); // req.flash is the way to set flashdata using connect-flash
                     // check to see if theres already a user with that email
                     // if the user is found but the password is wrong
-                    if (!user.validPassword(password))
+                    if (!isValidPassword(user,password))
                         return done(null, false, req.flash('loginMessage', 'Invalid Email or Password.')); // create the loginMessage and save it to session as flashdata
                     // all is well, return successful user
                     return done(null, user);
                 });
             });
         }));
+};
+
+// Generates hash using bCrypt
+var createHash = function(password){
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+};
+
+var isValidPassword = function(user, password){
+    return bCrypt.compareSync(password, user.password);
 };
