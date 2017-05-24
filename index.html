@@ -17,20 +17,13 @@
     <!-- Custom Fonts
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'> -->
-    
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-
     <!-- CSS Animation CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    
     <!-- <link rel="stylesheet" type="text/css" href="./css/fam.css"> -->
-<<<<<<< HEAD
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-=======
-    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
->>>>>>> 98dadf8d073f783059f0c1f73a25e24bd3c1c73b
-
+    <link rel="stylesheet" type="text/css" href="public/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="public/assets/css/main.css">
 </head>
 
 <body>
@@ -99,16 +92,24 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="newname" class="form-control-label">Name</label>
-                            <input type="text" class="form-control" id="newname">
+                            <label for="fname" class="form-control-label">First Name</label>
+                            <input type="text" class="form-control" id="fname">
                         </div>
                         <div class="form-group">
-                            <label for="newusername" class="form-control-label">Username</label>
-                            <input class="form-control" id="newusername">
+                            <label for="lname" class="form-control-label">Last Name</label>
+                            <input class="form-control" id="lname">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">Email</label>
+                            <input class="form-control" id="email" placeholder="spongebob@squarepants.com">
                         </div>
                         <div class="form-group">
                             <label for="newpassword" class="form-control-label">Password</label>
                             <input class="form-control" id="newpassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob" class="form-control-label">Date of Birth</label>
+                            <input type="text" data-format="DD-MM-YYYY" name="dateofb" class="form-control" placeholder="DD-MM-YYYY" id="dob">
                         </div>
                     </form>
                 </div>
@@ -118,7 +119,6 @@
             </div>
         </div>
     </div>
-
     <!-- Main Content -->
     <div id="home">
         <div class="animated fadeInUp">
@@ -132,16 +132,14 @@
                     <div class="aboutContent">
                         <p>Content goes here</p>
                     </div>
-
                     <div class="subheading">Keep in touch with your Family</div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="public/js/app.js"></script>
 </body>
+
 
 </html>
