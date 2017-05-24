@@ -20,6 +20,15 @@ module.exports = function(app) {
             res.json(dbPerson);
         });
     });
+
+    // process the signup form
+    // app.post('/signup', do all our passport stuff here);
+    // process the signup form
+    app.post('/api/user/signup', passport.authenticate('local-signup', {
+        successRedirect : '../index.html', // redirect to the secure profile section
+        failureRedirect : '../index.html', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 /*
     // POST route for saving a create a new user
     app.post("/api/user/signup", function(req, res) {
