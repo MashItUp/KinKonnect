@@ -1,6 +1,11 @@
 // KinKonnect Application Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
+var passport = require('passport');
+var flash    = require('connect-flash');
+
+var morgan   = require('morgan');
+var session      = require('express-session');
 
 //  *******   ADD OTHER DEPENDENCIES HERE   **************
 
@@ -13,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 var db = require("./models");
 
 //  { extended: true } allows for qs library use for parsing (instead of querystring)
+app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -22,9 +28,20 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //  application directory.   process.cwd() used for sequelize
 app.use(express.static("./public"));
 
+// required for passport
+app.use(session({
+    secret: '2Z7iL8l065Zsc0WT07cu',
+    resave: true,
+    saveUninitialized: true})); // session secret
+//app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' }));
+app.use(passport.initialize());
+app.use(passport.session()); //persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
 // Need to add the other api-routes here
 require("./routes/html-routes.js")(app);
-//require("./routes/user-api-routes.js")(app);
+//require("./routes/user-api-routes.js")(app, passport);
 
 
 db.sequelize.sync({ force: true }).then(function() {
