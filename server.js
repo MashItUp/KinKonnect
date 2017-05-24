@@ -24,6 +24,7 @@ app.use(express.static("./public"));
 
 // Need to add the other api-routes here
 //require("./routes/user-api-routes.js")(app);
+require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 
 db.sequelize.sync({ force: true }).then(function() {
