@@ -43,6 +43,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
+require("./routes/")
 //require("./routes/user-api-routes.js")(app, passport);
 
 
