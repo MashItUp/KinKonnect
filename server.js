@@ -23,11 +23,13 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("./public"));
 
 // Need to add the other api-routes here
-//require("./routes/user-api-routes.js")(app);
+
 require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
+//require("./routes/user-api-routes.js")(app);
 
-db.sequelize.sync({ force: true }).then(function() {
+
+db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
 	  console.log("App listening on PORT " + PORT);
 	});

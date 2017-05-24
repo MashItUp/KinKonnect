@@ -1,5 +1,5 @@
 $primary-color: #fcf7df;
-$home-font: 'Josefin Sans', sans-serif;
+$home-font: 'Alice', serif;
 
 body {
 	background-image:	   url('../img/elephantbg.jpg');
@@ -15,7 +15,7 @@ h1 {
 	color: $primary-color;
 	text-align: center;
 	font-size: 5em;
-	margin-top: 32%;
+	margin-top: 30%;
 }
 
 a, a:link, a:hover, a:visited, a:active {
@@ -56,12 +56,14 @@ a, a:link, a:hover, a:visited, a:active {
 p {
 	color: black;
 	text-align: center;
-	font-size: 2em;
+	font-size: 1em;
+	margin: auto;
 
 }
 
 .aboutContent {
 	display: none;
+
 }
 
 div.aboutContent {
