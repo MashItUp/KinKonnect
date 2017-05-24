@@ -83,5 +83,15 @@ module.exports = function(sequelize, DataTypes) {
             },
         freezeTableName: true
     });
+    // methods ======================
+    // generating a hash
+    Person.methods.generateHash = function(password) {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    };
+
+// checking if password is valid
+    Person.methods.validPassword = function(password) {
+        return bcrypt.compareSync(password, this.local.password);
+    };
     return Person;
 };
