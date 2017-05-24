@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
                         {
                             foreignKey:
                                 {
-                                    allowNull: true
+                                    allowNull: false
                                 },
                             onDelete: 'cascade', hooks:true
                         });

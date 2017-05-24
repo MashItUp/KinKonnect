@@ -59,6 +59,28 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     }, {
+        classMethods:
+            {
+                associate: function (models)
+                {
+                    // Using additional options like CASCADE etc for demonstration
+                    // Can also simply do Task.belongsTo(models.User);
+                    Person.hasMany(models.Family,
+                        {
+                            foreignKey:
+                                {
+                                    allowNull: false
+                                }
+                        });
+                    Person.hasMany(models.ChatPost,
+                        {
+                            foreignKey:
+                                {
+                                    allowNull: false
+                                }
+                        });
+                }
+            },
         freezeTableName: true
     });
     return Person;
