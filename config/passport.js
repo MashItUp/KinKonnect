@@ -26,7 +26,7 @@ module.exports = function(passport) {
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         console.log('deserializeUser');
-        User.findById(id, function(err, user) {
+        db.Person.findById(id, function(err, user) {
             done(err, user);
         });
     });
@@ -48,8 +48,6 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
             function(req, email, password, done) {
-                console.log("got to localstrategy");
-                //console.log("email: ", email);
                 // asynchronous
                 // User.findOne wont fire unless data is sent back
                 //console.log("got to Localstrategy");
@@ -63,22 +61,27 @@ module.exports = function(passport) {
                         // check to see if theres already a user with that email
                         if (user)
                         {
+                            console.log('user exists');
                             return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                         }
                         else
                         {
+                            console.log('got to create');
+                            console.log("req.body = ",req.body);
+
                             db.Person.create({
                                 first_name: req.body.fname,
                                 last_name: req.body.lname,
-                                email: email,
-                                password: createHash(password),
+                                email: req.body.email,
+                                password: createHash(req.body.password),
                                 dob: req.body.dob
                             }).then(function (dbPerson) {
+                                console.log('got to then function');
                                 // We have access to the new person as an argument inside of the callback function
                                 console.log("Registration successfull");
                                 return done(null, dbPerson);
                             }).catch(function (error) {
-                                //console.log("Error Message = ", error.message);
+                                console.log("Error Message = ", error.message);
                                 return done(null, false, req.flash("signupMessage", error));
                             });
                         }
@@ -100,11 +103,11 @@ module.exports = function(passport) {
         },
         function(req, email, password, done) {
             // asynchronous
-            // User.findOne wont fire unless data is sent back
+            // db.Person.findOne wont fire unless data is sent back
             process.nextTick(function() {
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
-                User.findOne({ where: {'User.email' :  email }}).then(function(err, user) {
+                db.Person.findOne({ where: {'email' :  email }}).then(function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
