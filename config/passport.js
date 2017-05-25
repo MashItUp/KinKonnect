@@ -20,14 +20,25 @@ module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
         console.log('serializeuser');
+        console.log('serial user id = ', user.id);
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         console.log('deserializeUser');
-        db.Person.findById(id, function(err, user) {
-            done(err, user);
+        db.Person.findById(id).then(function(user) {
+
+            if (user) {
+
+                done(null, user.get());
+
+            } else {
+
+                done(user.errors, null);
+
+            }
+
         });
     });
 
@@ -50,30 +61,27 @@ module.exports = function(passport) {
             function(req, email, password, done) {
                 // asynchronous
                 // User.findOne wont fire unless data is sent back
-                //console.log("got to Localstrategy");
                 process.nextTick(function() {
+                    console.log('nextTick signup');
                     // find a user whose email is the same as the forms email
                     // we are checking to see if the user trying to login already exists
-                    db.Person.findOne({ where: {'email' :  email }}).then(function(err, user) {
-                        // if there are any errors, return the error
-                        if (err)
-                            return done(err);
+                    db.Person.findOne({ where: {'email' :  email }}).then(function(user) {
+                        console.log("got past findOne");
+                        console.log('user =', user);
                         // check to see if theres already a user with that email
                         if (user)
                         {
-                            console.log('user exists');
+                            console.log('user exists = ', user.email);
                             return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                         }
                         else
                         {
-                            console.log('got to create');
-                            console.log("req.body = ",req.body);
-
+                            console.log("didn't find user");
                             db.Person.create({
                                 first_name: req.body.fname,
                                 last_name: req.body.lname,
-                                email: req.body.email,
-                                password: createHash(req.body.password),
+                                email: email,
+                                password: createHash(password),
                                 dob: req.body.dob
                             }).then(function (dbPerson) {
                                 console.log('got to then function');
@@ -81,7 +89,7 @@ module.exports = function(passport) {
                                 console.log("Registration successfull");
                                 return done(null, dbPerson);
                             }).catch(function (error) {
-                                console.log("Error Message = ", error.message);
+                                console.log("Error Message = ", error);
                                 return done(null, false, req.flash("signupMessage", error));
                             });
                         }
@@ -95,9 +103,10 @@ module.exports = function(passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
-    passport.use('local-login', new LocalStrategy({
+    passport.use('local-login', new LocalStrategy(
+        {
             // by default, local strategy uses username and password, we will override with email
-            emailField : 'email',
+            usernameField : 'email',
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
@@ -105,19 +114,22 @@ module.exports = function(passport) {
             // asynchronous
             // db.Person.findOne wont fire unless data is sent back
             process.nextTick(function() {
+                console.log('nextTick login');
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
-                db.Person.findOne({ where: {'email' :  email }}).then(function(err, user) {
-                    // if there are any errors, return the error
-                    if (err)
-                        return done(err);
-                    // if no user is found, return the message
-                    if (!user)
-                        return done(null, false, req.flash('loginMessage', 'Invalid Email or Password.')); // req.flash is the way to set flashdata using connect-flash
+                db.Person.findOne({ where: {'email' :  email }}).then(function(user) {
+                    console.log('user email =', user.email);
+                    if (!user.email) {
+                        console.log('user email =', user.email);
+                        console.log('login user not found');
+                        return done(null, false, req.flash('loginMessage', 'Invalid Email.')); // req.flash is the way to set flashdata using connect-flash
+                    }
                     // check to see if theres already a user with that email
                     // if the user is found but the password is wrong
-                    if (!isValidPassword(user,password))
-                        return done(null, false, req.flash('loginMessage', 'Invalid Email or Password.')); // create the loginMessage and save it to session as flashdata
+                    if (!isValidPassword(user,password)) {
+                        console.log('invalid password');
+                        return done(null, false, req.flash('loginMessage', 'Invalid Password.')); // create the loginMessage and save it to session as flashdata
+                    }
                     // all is well, return successful user
                     return done(null, user);
                 });
@@ -131,5 +143,7 @@ var createHash = function(password){
 };
 
 var isValidPassword = function(user, password){
+    console.log('password entered = ', password);
+    console.log('user.password = ', user.password);
     return bCrypt.compareSync(password, user.password);
 };

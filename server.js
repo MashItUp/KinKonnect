@@ -30,7 +30,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Serve static content for the app from the "public" directory in the 
 //  application directory.   process.cwd() used for sequelize
-app.use(express.static("./public"));
+//app.use(express.static("./public"));
 
 // required for passport
 app.use(session({
@@ -44,13 +44,12 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // Need to add the other api-routes here
-
 require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app, passport);
 
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
 	  console.log("App listening on PORT " + PORT);
 	});

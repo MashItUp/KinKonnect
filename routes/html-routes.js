@@ -21,8 +21,8 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../index.html"));
     });*/
     app.get('/', function(req, res) {
+        console.log('display index.ejs');
         res.render('index.ejs'); // load the index.ejs file
-        //res.sendFile(path.join(__dirname, "../views/index.ejs"));
     });
 
 };
