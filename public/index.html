@@ -79,7 +79,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default">Log In</button>
+                    <button type="submit" class="btn btn-default submit">Log In</button>
                 </div>
             </div>
         </div>
@@ -106,20 +106,20 @@
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-control-label">Email</label>
-                            <input class="form-control" id="email" placeholder="username@domain.com">
+                            <input class="form-control" id="email" placeholder="username@domain.com" >
                         </div> 
                         <div class="form-group">
                             <label for="newpassword" class="form-control-label">Password</label>
                             <input class="form-control" id="newpassword">
                         </div> 
                         <div class="form-group">
-                            <label for="dob" class="form-control-label">Password</label>
-                            <input class="form-control" id="dob" placeholder="DD-MM-YYYY">
+                            <label for="dob" class="form-control-label">Date of Birth</label>
+                            <input class="form-control" id="dob"  placeholder="DD-MM-YYYY">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default">Register</button>
+                    <button type="submit" class="btn btn-default submit">Register</button>
                 </div>
             </div>
         </div>
@@ -150,6 +150,38 @@
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/javascript">
+        $(".submit").on("click", function(event) {
+            event.preventDefault();
+
+            var estUser = {
+                username: $("#username").val(),
+                password: $("#password").val()
+            };
+            console.log(estUser);
+
+            var newUser = {
+                firstName: $("#fname").val(),
+                lastName: $("#lname").val(),
+                email: $("#email").val(),
+                password: $("#newpassword").val(),
+                dob: $("#dob").val()
+            };
+            console.log(newUser);
+        });
+
+        function addUser(newUser) {
+            var currentURL = window.location.origin;
+        $.ajax({
+            url: currentURL + "/api/user/signup",
+            method: "POST"
+        }).done(function (newperson) {
+            console.log(newperson);
+        });
+        addUser(newUser);
+    };
+
+    </script>
 </body>
 
 </html>
