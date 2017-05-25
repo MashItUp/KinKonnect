@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 // Requires models js files
 var db = require("./models");
 
+require('./config/passport')(passport); // pass passport for configuration
+
 //  { extended: true } allows for qs library use for parsing (instead of querystring)
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json());
@@ -40,13 +42,12 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // Need to add the other api-routes here
-
 require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-//require("./routes/user-api-routes.js")(app, passport);
+require("./routes/user-api-routes.js")(app, passport);
 
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
 	  console.log("App listening on PORT " + PORT);
 	});
