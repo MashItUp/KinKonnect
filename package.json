@@ -35,8 +35,7 @@
     "bcrypt-nodejs": "latest",
     "morgan": "^1.8.1",
     "cookie-parser": "^1.4.3",
-    "express-session": "^1.15.3",
-    "ejs" : "~0.8.5"
+    "express-session": "^1.15.3"
   },
   "devDependencies": {
     "karma": "^1.7.0"

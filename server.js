@@ -12,8 +12,6 @@ var session      = require('express-session');
 // Set up for the Express App
 var app = express();
 
-app.set('view engine', 'ejs'); // set up ejs for templating
-
 // Needed for Heroku deployment
 const PORT = process.env.PORT || 3000;
 // Requires models js files
@@ -30,7 +28,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Serve static content for the app from the "public" directory in the 
 //  application directory.   process.cwd() used for sequelize
-//app.use(express.static("./public"));
+app.use(express.static("./public"));
 
 // required for passport
 app.use(session({
