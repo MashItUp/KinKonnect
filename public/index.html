@@ -153,7 +153,7 @@
         var currentURL = window.location.origin;
         $.ajax({
             url: currentURL + "/api/user/login",
-            method: "GET"
+            method: "POST"
         }).done(function(olduser) {
             console.log(olduser);
         });
