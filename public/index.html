@@ -17,18 +17,12 @@
     <!-- Custom Fonts
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'> -->
-    
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Alice" rel="stylesheet">
-
     <!-- CSS Animation CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-
     <!-- Link CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
-
-
-
 </head>
 
 <body>
@@ -106,15 +100,15 @@
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-control-label">Email</label>
-                            <input class="form-control" id="email" placeholder="username@domain.com" >
-                        </div> 
+                            <input class="form-control" id="email" placeholder="username@domain.com">
+                        </div>
                         <div class="form-group">
                             <label for="newpassword" class="form-control-label">Password</label>
-                            <input class="form-control" id="newpassword">
-                        </div> 
+                            <input type="password" class="form-control" id="newpassword">
+                        </div>
                         <div class="form-group">
                             <label for="dob" class="form-control-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob"  placeholder="DD-MM-YYYY">
+                            <input type="date" class="form-control" id="dob" placeholder="DD-MM-YYYY">
                         </div>
                     </form>
                 </div>
@@ -124,7 +118,6 @@
             </div>
         </div>
     </div>
-
     <!-- Main Content -->
     <div id="home">
         <div class="animated fadeInUp">
@@ -139,48 +132,55 @@
                         <p>Content goes here</p>
                     </div>
                 </div>
-                
                 <div class="col-md-4 col-md-offset-4">
                     <div class="subheading">Keep in touch with your Family</div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="js/app.js"></script>
     <script type="text/javascript">
-        $(".submit").on("click", function(event) {
-            event.preventDefault();
+    $(".submit").on("click", function(event) {
+        event.preventDefault();
 
-            var estUser = {
-                username: $("#username").val(),
-                password: $("#password").val()
-            };
-            console.log(estUser);
+        var estUser = {
+            username: $("#username").val(),
+            password: $("#password").val()
+        };
+        console.log(estUser);
 
-            var newUser = {
-                fname: $("#fname").val(),
-                lname: $("#lname").val(),
-                email: $("#email").val(),
-                password: $("#newpassword").val(),
-                dob: $("#dob").val()
-            };
-            console.log(newUser);
-        });
+        var newUser = {
+            fname: $("#fname").val(),
+            lname: $("#lname").val(),
+            email: $("#email").val(),
+            password: $("#newpassword").val(),
+            dob: $("#dob").val()
+        };
+        console.log(newUser);
+
+        function logIn(estUser) {
+            var currentURL = window.location.origin;
+            $.ajax({
+                url: currentURL + "/api/user/login",
+                method: "GET"
+            }).done(function(olduser) {
+                console.log(olduser);
+            });
+            logIn(estUser);
+        };
 
         function addUser(newUser) {
             var currentURL = window.location.origin;
-        $.ajax({
-            url: currentURL + "/api/user/signup",
-            method: "POST"
-        }).done(function (newperson) {
-            console.log(newperson);
-        });
-        addUser(newUser);
-    };
-
+            $.ajax({
+                url: currentURL + "/api/user/signup",
+                method: "POST"
+            }).done(function(newperson) {
+                console.log(newperson);
+            });
+            addUser(newUser);
+        };
+    });
     </script>
 </body>
 
