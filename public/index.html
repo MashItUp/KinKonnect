@@ -145,7 +145,7 @@
         event.preventDefault();
 
         var estUser = {
-            username: $("#username").val(),
+            email: $("#username").val(),
             password: $("#password").val()
         };
         console.log(estUser);
@@ -153,7 +153,8 @@
         var currentURL = window.location.origin;
         $.ajax({
             url: currentURL + "/api/user/login",
-            method: "POST"
+            method: "POST",
+            data: estUser
         }).done(function(olduser) {
             console.log(olduser);
         });
@@ -173,7 +174,8 @@
         var currentURL = window.location.origin;
         $.ajax({
             url: currentURL + "/api/user/signup",
-            method: "POST"
+            method: "POST",
+            data: newUser
         }).done(function(newperson) {
             console.log(newperson);
         });
