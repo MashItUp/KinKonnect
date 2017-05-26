@@ -68,12 +68,12 @@
                         </div>
                         <div class="form-group">
                             <label for="password" class="form-control-label">Password</label>
-                            <input class="form-control" id="password">
+                            <input type="password" class="form-control" id="password">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-default submit">Log In</button>
+                    <button type="submit" class="btn btn-default submitlogin">Log In</button>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-default submit">Register</button>
+                    <button type="submit" class="btn btn-default submitreg">Register</button>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="js/app.js"></script>
     <script type="text/javascript">
-    $(".submit").on("click", function(event) {
+    $(".submitlogin").on("click", function(event) {
         event.preventDefault();
 
         var estUser = {
@@ -150,6 +150,17 @@
         };
         console.log(estUser);
 
+        var currentURL = window.location.origin;
+        $.ajax({
+            url: currentURL + "/api/user/login",
+            method: "GET"
+        }).done(function(olduser) {
+            console.log(olduser);
+        });
+    });
+
+    $(".submitreg").on("click", function(event) {
+        event.preventDefault();
         var newUser = {
             fname: $("#fname").val(),
             lname: $("#lname").val(),
@@ -159,27 +170,13 @@
         };
         console.log(newUser);
 
-        function logIn(estUser) {
-            var currentURL = window.location.origin;
-            $.ajax({
-                url: currentURL + "/api/user/login",
-                method: "GET"
-            }).done(function(olduser) {
-                console.log(olduser);
-            });
-            logIn(estUser);
-        };
-
-        function addUser(newUser) {
-            var currentURL = window.location.origin;
-            $.ajax({
-                url: currentURL + "/api/user/signup",
-                method: "POST"
-            }).done(function(newperson) {
-                console.log(newperson);
-            });
-            addUser(newUser);
-        };
+        var currentURL = window.location.origin;
+        $.ajax({
+            url: currentURL + "/api/user/signup",
+            method: "POST"
+        }).done(function(newperson) {
+            console.log(newperson);
+        });
     });
     </script>
 </body>
