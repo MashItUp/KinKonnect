@@ -9,6 +9,7 @@ module.exports = function (grunt) {
                 files: {
                     'public/assets/css/main.css': 'public/assets/css/main.scss'
                 }
+                 
             }
         },
         watch: {

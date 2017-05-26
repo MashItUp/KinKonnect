@@ -1,6 +1,7 @@
 $primary-color: #fcf7df;
 $home-font: 'Alice', serif;
 
+
 body {
 	background-image:	   url('../img/elephantbg.jpg');
 	background-position:   center center;
@@ -67,10 +68,21 @@ p {
 }
 
 div.aboutContent {
-		margin: 20px;
-		width: 50%;
-  		background-color: #ffffff;
-  		border: 1px solid black;
-  		opacity: 0.6;
-  		filter: alpha(opacity=60);
+	margin: 20px;
+	width: 50%;
+  	background-color: #ffffff;
+  	border: 1px solid black;
+  	opacity: 0.6;
+  	filter: alpha(opacity=60);
+}
+
+.maincontent {
+	display: inline-block;
+	overflow: auto;
+
+}
+
+.sidebar {
+	display: inline-block;
+	overflow: auto;
 }
