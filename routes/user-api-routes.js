@@ -42,12 +42,12 @@ module.exports = function(app, passport) {
        app.get('/dashboard', isLoggedIn, function(req,res){
            console.log('got to dashboard');
            //console.log('req.user = ', req.user);
-           /*res.render('../dashboard', {
+           res.render('dashboard', {
                userid : req.user.id, // get the user out of session and pass to template
                fname: req.user.first_name,
                lname: req.user.last_name
-           });*/
-           res.sendFile(path.join(__dirname, "../public/index.html"));
+           });
+           //res.sendFile(path.join(__dirname, "../public/index.html"));
        });
 
     app.get('/index', function(req, res) {
