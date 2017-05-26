@@ -17,7 +17,7 @@ module.exports = function(app) {
     // index route loads view.html
     app.get("/", function(req, res) {
         // GET route for main page
-       res.render('index.html', { message: req.flash('loginMessage') });
-       // res.sendFile(path.join(__dirname, "../index.html"));
+       //res.render('index.html', { message: req.flash('loginMessage') });
+        res.sendFile(path.join(__dirname, "../index.html"));
     });
 };

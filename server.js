@@ -30,6 +30,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //  application directory.   process.cwd() used for sequelize
 app.use(express.static("./public"));
 
+app.engine('.html', require('ejs').__express);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+
 // required for passport
 app.use(session({
     secret: '2Z7iL8l065Zsc0WT07cu',
