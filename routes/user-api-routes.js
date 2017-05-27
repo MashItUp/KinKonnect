@@ -18,7 +18,7 @@ module.exports = function(app, passport) {
     // =====================================
     // process the login form
     app.post('/api/user/login', passport.authenticate('local-login', {
-        successRedirect: '/dashboard', // redirect to the secure profile section
+        successRedirect: '/dashboard', // redirect to the secure dashboard section
         failureRedirect: '/index', // redirect back to the signup page if there is an error
         failureFlash: 'Invalid username or password.' // allow flash messages
     }));
@@ -41,16 +41,14 @@ module.exports = function(app, passport) {
     // we will use route middleware to verify this (the isLoggedIn function)
        app.get('/dashboard', isLoggedIn, function(req,res){
            console.log('got to dashboard');
-           //console.log('req.user = ', req.user);
-           res.render('dashboard.html', {
-               userid : req.user.id, // get the user out of session and pass to template
-               fname: req.user.first_name,
-               lname: req.user.last_name
-           });
-           //res.sendFile(path.join(__dirname, "../views/dashboard.html"));
+           console.log('req.user = ', req.user);
+           var hbsObject = {
+               user: req.user
+           };
+           res.render('dashboard', hbsObject);
        });
 
-    app.get('/index', function(req, res) {
+    app.get('/login', function(req, res) {
         res.redirect('/');
     });
 

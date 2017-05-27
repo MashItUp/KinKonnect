@@ -1,0 +1,115 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#loginModal" data-whatever="@mdo">Sign In</a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#registerModal" data-whatever="@mdo">Register</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Log In Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" align="center" id="loginModalLabel">Log In</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/api/user/login" method="POST">
+                    <div class="form-group">
+                        <label for="username" class="form-control-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-control-label">Password</label>
+                        <input class="form-control" type="password" id="password" name="password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Log In</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" align="center" id="registerModalLabel">Register</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/api/user/signup" method="POST">
+                    <div class="form-group">
+                        <label for="fname" class="form-control-label">First Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname" class="form-control-label">Last Name</label>
+                        <input class="form-control" id="lname" name="lname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-control-label">Email</label>
+                        <input class="form-control" id="email" placeholder="username@domain.com" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="newpassword" class="form-control-label">Password</label>
+                        <input class="form-control" type="password" id="newpassword" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob" class="form-control-label">Date of Birth</label>
+                        <input class="form-control" type="date" id="dob" name="dob">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default">Register</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div id="home">
+    <div class="animated fadeInUp">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 class="site-heading">
+                    <a id="heading" href="#">Kin Konnect</a>
+                </h1>
+            </div>
+            <div class="col-lg-10 col-lg-offset-3">
+                <div class="aboutContent">
+                    <p>Content goes here</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="subheading">Keep in touch with your Family</div>
+            </div>
+        </div>
+    </div>
+</div>
