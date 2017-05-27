@@ -1,14 +1,12 @@
 $primary-color: #fcf7df;
 $home-font: 'Alice', serif;
 
-
-body {
-	background-image:	   url('../img/elephantbg.jpg');
+#backgroundimage {
 	background-position:   center center;
 	background-repeat:     no-repeat;
 	background-attachment: fixed;
 	background-size:       cover;
-
+	height: 100%
 }
 
 h1 {
@@ -77,12 +75,9 @@ div.aboutContent {
 }
 
 .maincontent {
-	display: inline-block;
-	overflow: auto;
 
 }
 
 .sidebar {
-	display: inline-block;
-	overflow: auto;
+
 }
