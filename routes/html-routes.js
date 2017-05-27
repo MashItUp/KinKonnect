@@ -18,6 +18,7 @@ module.exports = function(app) {
     app.get("/", function(req, res) {
         // GET route for main page
        //res.render('index.html', { message: req.flash('loginMessage') });
-        res.sendFile(path.join(__dirname, "../index.html"));
+        //res.sendFile(path.join(__dirname, "../index.html"));
+        res.render('index'); // load the index.handlebars file
     });
 };

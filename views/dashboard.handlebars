@@ -1,146 +1,75 @@
-    <!-- Navigation -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html" data-toggle="modal" data-target="#loginModal" data-whatever="@mdo">Sign In</a>
-                    </li>
-                    <li>
-                        <a href="index.html" data-toggle="modal" data-target="#registerModal" data-whatever="@mdo">Register</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
         </div>
-        <!-- /.container -->
-    </nav>
-    <!-- Log In Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" align="center" id="loginModalLabel">Log In</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="username" class="form-control-label">Username</label>
-                            <input type="text" class="form-control" id="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="form-control-label">Password</label>
-                            <input class="form-control" id="password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default">Log In</button>
-                </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Main Content -->
+<div class="maincontent">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-body">
+                Panel content
             </div>
         </div>
     </div>
-    <!-- Register Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" align="center" id="registerModalLabel">Register</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="fname" class="form-control-label">First Name</label>
-                            <input type="text" class="form-control" id="fname">
-                        </div>
-                        <div class="form-group">
-                            <label for="lname" class="form-control-label">Last Name</label>
-                            <input class="form-control" id="lname">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-control-label">Email</label>
-                            <input class="form-control" id="email" placeholder="username@domain.com">
-                        </div> 
-                        <div class="form-group">
-                            <label for="newpassword" class="form-control-label">Password</label>
-                            <input class="form-control" id="newpassword">
-                        </div> 
-                        <div class="form-group">
-                            <label for="dob" class="form-control-label">Password</label>
-                            <input class="form-control" id="dob" placeholder="DD-MM-YYYY">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default">Register</button>
-                </div>
+</div>
+
+
+<!-- Side Bar -->
+<div class="sidebar">
+    <div class="col-sm-4 col-sm-offset-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recent Posts</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Categories</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Calendar</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Photo Album</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
             </div>
         </div>
     </div>
-
-    <!-- Main Content -->
-    <div class="maincontent">
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">Panel heading without title</div>
-                    <div class="panel-body">
-                    Panel content
-                    </div>
-            </div>
-        </div>
-    </div>
-
-    
-    <!-- Side Bar -->
-    <div class="sidebar">
-        <div class="col-sm-4 col-sm-offset-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Recent Posts</h3>
-                </div>
-                <div class="panel-body">
-                Panel content
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Categories</h3>
-                </div>
-                <div class="panel-body">
-                Panel content
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Calendar</h3>
-                </div>
-                <div class="panel-body">
-                Panel content
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Photo Album</h3>
-                </div>
-                <div class="panel-body">
-                Panel content
-                </div>
-            </div>
-        </div>
-    </div>
+</div>

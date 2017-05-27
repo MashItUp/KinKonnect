@@ -28,11 +28,13 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Serve static content for the app from the "public" directory in the 
 //  application directory.   process.cwd() used for sequelize
-app.use(express.static("./public"));
+app.use(express.static(process.cwd() + "/public"));
 
-app.engine('.html', require('ejs').__express);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
+var exphbs = require("express-handlebars");
+var Handlebars = require('handlebars');
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // required for passport
 app.use(session({
@@ -46,7 +48,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // Need to add the other api-routes here
-require("./routes/test-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app, passport);
 
