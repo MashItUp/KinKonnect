@@ -38,7 +38,8 @@
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",
     "express-handlebars": "^3.0.0",
-    "handlebars-helpers": "^0.8.2"
+    "handlebars-helpers": "^0.8.2",
+    "handlebars": "^4.0.10"
   },
   "devDependencies": {
     "karma": "^1.7.0"
