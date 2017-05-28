@@ -45,9 +45,6 @@ module.exports = function(app, passport) {
            //db.
            console.log('got to db.Family.FindAll');
            db.Family.findAll({
-               where: {
-                   id: req.user.id
-               },
                include : [
                    {
                        model: db.Personfamily,
