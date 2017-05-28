@@ -18,19 +18,15 @@ module.exports = function(sequelize, DataTypes) {
                 {
                     // Using additional options like CASCADE etc for demonstration
                     // Can also simply do Task.belongsTo(models.User);
-                    Family.belongsToMany(models.Person,
+                    Family.belongsTo(models.Person,
                         {
                             foreignKey:
                                 {
                                     allowNull: false
                                 },
-                            onDelete: 'cascade', hooks:true,
-                            through: 'models.Person'
+                            onDelete: 'cascade', hooks:true
                         });
-                    Family.belongsToMany(models.Personfamily,
-                        {
-                            through: 'models.Person'
-                        })
+                    Family.hasMany(models.Personfamily)
                 }
             },
             freezeTableName: true

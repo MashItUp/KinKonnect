@@ -16,10 +16,14 @@ module.exports = function(sequelize, DataTypes) {
                                     },
                                 onDelete: 'cascade', hooks:true
                             });
-                        Personfamily.belongsToMany(models.Family,
+                        Personfamily.belongsTo(models.Family,
                             {
-                                through: 'models.Person'
-                            })
+                                foreignKey:
+                                    {
+                                        allowNull: false
+                                    },
+                                onDelete: 'cascade', hooks:true
+                            });
                     }
                 },
             freezeTableName: true
