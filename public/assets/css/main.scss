@@ -1,5 +1,10 @@
 $primary-color: #fcf7df;
 $home-font: 'Alice', serif;
+$modal-backdrop-bg: red;
+
+html, body, .view {
+	height: 100%;
+}
 
 #backgroundimage {
 	background-position:   center center;
@@ -13,8 +18,8 @@ h1 {
 	font-family: $home-font;
 	color: $primary-color;
 	text-align: center;
-	font-size: 5em;
-	margin-top: 30%;
+	font-size: 6em;
+	margin-top: 23%;
 }
 
 a, a:link, a:hover, a:visited, a:active {
@@ -79,16 +84,30 @@ div.aboutContent {
 	height: 20%;
 	padding: 3% 2% 3% 2%;
 
-
 }
 
 .maincontent {
 
 }
 
-.sidebar {
-
+@media (min-width: 768px) {
+	.col-sm-offset-8 {
+    	margin-left: 0;
+    }
 }
+
+.btn {
+	margin-left: 15px;
+}
+
+.navbar, .navbar-default {
+	opacity: 0.4;
+}
+
+#loginModal, #registerModal {
+	background-color: #fdcd9f;
+}
+
 
 
 
