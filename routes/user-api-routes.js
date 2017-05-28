@@ -50,8 +50,14 @@ module.exports = function(app, passport) {
                        model: db.Personfamily,
                        required: true,
                        where: {
-                           PersonId: req.user.id,
-                           FamilyId: db.Family.id
+                           PersonId: req.user.id
+                       }
+                   },
+                   {
+                       model: db.Person,
+                       required: true,
+                       where: {
+                           id: db.Personfamily.PersonId
                        }
                    }
                ]

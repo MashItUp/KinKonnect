@@ -59,6 +59,7 @@ module.exports = function(sequelize, DataTypes) {
                                     allowNull: false
                                 }
                         });
+                    Person.hasMany(models.Personfamily)
                 }
             },
         freezeTableName: true
