@@ -47,32 +47,29 @@ module.exports = function(app, passport) {
            db.Family.findAll({
                include : [
                    {
-                       model: db.Personfamily,
-                       required: true,
-                       where: {
-                           PersonId: req.user.id
-                       }
+                       model: db.Personfamily
                    },
                    {
                        model: db.Person,
                        required: true,
                        where: {
-                           id: db.Personfamily.PersonId
+                           id: req.user.id
                        }
                    }
                ]
            }).then(function(dbFamily) {
                console.log('got to find family');
-               db.ChatRoom.findAll({ include:{model: db.Family, as: 'Family',  where: {FamilyId : Family.id}, required: true}}).then(function (dbChatRoom) {
+            /*   db.ChatRoom.findAll({ include:{model: db.Family, as: 'Family',  where: {FamilyId : Family.id}, required: true}}).then(function (dbChatRoom) {*/
                    console.log('got to find chatroom');
+                   console.log('dbFamily = ', dbFamily);
                    var hbsObject = {
                        person: req.user,
-                       family: dbFamily,
-                       chatroom: dbChatRoom
+                       family: dbFamily
+                       //chatroom: dbChatRoom
                    };
                    res.render('dashboard', hbsObject);
                });
-           });
+           //});
        });
 
     app.get('/login', function(req, res) {
