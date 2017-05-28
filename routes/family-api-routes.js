@@ -31,16 +31,29 @@ module.exports = function(app,  passport) {
                 console.log("Error Message = ", error);
                 return done(null, false, req.flash("createPersonfamilyError", error));
             });
-            //db.Per
             // Get user info to send to dashboard handlebars
             db.Person.findOne({ where: {'id' :  req.body.personId }}).then(function(dbPerson) {
-                db.ChatRoom.findAll({}).then(function(dbChatRoom) {
-                    var hbsObject = {
-                        person: dbPerson,
-                        family: dbFamily,
-                        chatroom: dbChatRoom
+                var options = { include:   [  {model:db.Personfamily, as: pf},
+                    {model: db.Family, as: f},
+                    {model: db.Person, as: p}]
+                };
+                options.where = {};
+                options.where.PersonId = req.body.personId;
+
+                db.Family.findAll(options).then(function(dbFamily) {
+                    var options2 = { include:   [  {model:db.Family, as: f},
+                        {model: db.ChatRoom, as: cr}]
                     };
-                    res.render('dashboard', hbsObject);
+                    options.where = cr.FamilyId = f.id;
+
+                    db.ChatRoom.findAll(options2).then(function (dbChatRoom) {
+                        var hbsObject = {
+                            person: dbPerson,
+                            family: dbFamily,
+                            chatroom: dbChatRoom
+                        };
+                        res.render('dashboard', hbsObject);
+                    });
                 });
             });
         }).catch(function (error) {

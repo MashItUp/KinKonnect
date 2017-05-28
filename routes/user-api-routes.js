@@ -40,12 +40,36 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
        app.get('/dashboard', isLoggedIn, function(req,res){
-           console.log('got to dashboard');
-           console.log('req.user = ', req.user);
-           var hbsObject = {
-               user: req.user
-           };
-           res.render('dashboard', hbsObject);
+           //console.log('got to dashboard');
+           //console.log('req.user = ', req.user);
+           //db.
+           console.log('got to db.Family.FindAll');
+           db.Family.findAll({
+               where: {
+                   id: req.user.id
+               },
+               include : [
+                   {
+                       model: db.Personfamily,
+                       required: true,
+                       where: {
+                           PersonId: req.user.id,
+                           FamilyId: db.Family.id
+                       }
+                   }
+               ]
+           }).then(function(dbFamily) {
+               console.log('got to find family');
+               db.ChatRoom.findAll({ include:{model: db.Family, as: 'Family',  where: {FamilyId : Family.id}, required: true}}).then(function (dbChatRoom) {
+                   console.log('got to find chatroom');
+                   var hbsObject = {
+                       person: req.user,
+                       family: dbFamily,
+                       chatroom: dbChatRoom
+                   };
+                   res.render('dashboard', hbsObject);
+               });
+           });
        });
 
     app.get('/login', function(req, res) {
