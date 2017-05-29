@@ -59,17 +59,43 @@ module.exports = function(app, passport) {
                ]
            }).then(function(dbFamily) {
                console.log('got to find family');
-            /*   db.ChatRoom.findAll({ include:{model: db.Family, as: 'Family',  where: {FamilyId : Family.id}, required: true}}).then(function (dbChatRoom) {*/
-                   console.log('got to find chatroom');
-                   console.log('dbFamily = ', dbFamily);
-                   var hbsObject = {
-                       person: req.user,
-                       family: dbFamily
-                       //chatroom: dbChatRoom
-                   };
-                   res.render('dashboard', hbsObject);
-               });
-           //});
+               console.log('dbFamily length = ', dbFamily.length);
+            if(dbFamily.length === 0)
+            {
+                var hbsObject = {
+                    person: req.user
+                };
+            }
+            else if(dbFamily.length > 1)
+            {
+                var hbsObject = {
+                    person: req.user,
+                    family: dbFamily
+                };
+            }
+            else
+            {
+                // family length is 1, look for chatrooms
+                console.log("Family id = ", dbFamily.id);
+
+                db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily.id }}).then(function(dbChatRoom){
+                    console.log('got to find chatroom');
+                    console.log('dbChatRoom length = ', dbChatRoom.length);
+                    console.log('dbChatRoom = ', dbChatRoom);
+
+                    if(dbChatRoom.length > 0) {
+                        var hbsObject = {
+                            person: req.user,
+                            family: dbFamily,
+                            chatroom: dbChatRoom
+                        }
+                    }
+                });
+            }
+
+            res.render('dashboard', hbsObject);
+
+           });
        });
 
     app.get('/login', function(req, res) {
