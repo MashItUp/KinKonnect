@@ -94,13 +94,12 @@ module.exports = function(app,  passport) {
      */
     app.get('/api/family/getone', isLoggedIn, function(req, res) {
 
-        var personId = req.query.personId;
         var familyId = req.query.familyId;
-
         console.log('got to getone');
-        var hbsObject = {};
+        console.log('req.query = ', req.query);
+        res.redirect('/dashboard');
+     /*   var hbsObject = {};
         db.Family.findOne({ where: {'id' :  familyId }}).then(function(dbFamily) {
-            db.Person.findOne({ where: {'id' : personId}}).then(function(dbPerson){
                 db.ChatRoom.findAll({ where: {'FamilyId' :  familyId }}).then(function(dbChatRoom){
                     //console.log('got to find chatroom');
                     //console.log('dbChatRoom length = ', dbChatRoom.length);
@@ -121,10 +120,10 @@ module.exports = function(app,  passport) {
                         };
                     }
                     console.log('get one family = ', hbsObject);
-                    res.render('dashboard', hbsObject);
+                    //res.render('dashboard', hbsObject);
+                    res.redirect('/dashboard');
                 });
-            })
-        });
+        }); */
     });
 };
 

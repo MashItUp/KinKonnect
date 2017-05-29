@@ -40,44 +40,46 @@
 <!-- Main Content -->
 <div class="maincontent">
     <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Chatrooms</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    {{#each chatroom}}
-                        <div class="col-xs-6 col-md-3">
+        {{#if chatroom}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Chatrooms</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        {{#each chatroom}}
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    {{this.name}}
+                                </a>
+                            </div>
+                        {{/each}}
+
+                    <!--    <div class="col-xs-6 col-md-3">
                             <a href="#" class="thumbnail">
-                                {{this.name}}
+                                <img src="http://placehold.it/200x100" alt="...">
+                                Topic 2
                             </a>
                         </div>
-                    {{/each}}
 
-                <!--    <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/200x100" alt="...">
-                            Topic 2
-                        </a>
-                    </div>
+                        <div class="col-xs-6 col-md-3">
+                            <a href="#" class="thumbnail">
+                                <img src="http://placehold.it/200x100" alt="...">
+                                Topic 3
+                            </a>
+                        </div>
 
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/200x100" alt="...">
-                            Topic 3
-                        </a>
+                        <div class="col-xs-6 col-md-3">
+                            <a href="#" class="thumbnail">
+                                <img src="http://placehold.it/200x100" alt="...">
+                                Topic 4
+                            </a>
+                        </div>
+                        -->
                     </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/200x100" alt="...">
-                            Topic 4
-                        </a>
-                    </div>
-                    -->
                 </div>
             </div>
-        </div>
+        {{/if}}
         <!-- Add Chatroom Button -->
         <a href="/api/chatroom/create" type="button" class="btn btn-default">Create Chatroom</a>
     </div>
