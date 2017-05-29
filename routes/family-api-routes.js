@@ -39,13 +39,10 @@ module.exports = function(app,  passport) {
                 db.Family.findAll({
                     include : [
                         {
-                            model: db.Personfamily
-                        },
-                        {
-                            model: db.Person,
+                            model: db.Personfamily,
                             required: true,
                             where: {
-                                id: req.body.personId
+                                PersonId: req.body.personId
                             }
                         }
                     ]
@@ -124,13 +121,10 @@ module.exports = function(app,  passport) {
                        db.Family.findAll({
                            include: [
                                {
-                                   model: db.Personfamily
-                               },
-                               {
-                                   model: db.Person,
+                                   model: db.Personfamily,
                                    required: true,
                                    where: {
-                                       id: req.body.personId
+                                       PersonId: req.body.personId
                                    }
                                }
                            ]
