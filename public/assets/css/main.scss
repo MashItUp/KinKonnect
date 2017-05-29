@@ -1,9 +1,14 @@
 $primary-color: #fcf7df;
 $home-font: 'Alice', serif;
 $modal-backdrop-bg: red;
+$rose: #d0605e;
+$violet: #735668;
+$brown: #853c1c;
+
 
 html, body, .view {
 	height: 100%;
+  	margin: 0;
 }
 
 #backgroundimage {
@@ -125,6 +130,12 @@ div.aboutContent {
 	margin: 5% 5% 0 5%; 
 }
 
+.footer {
+	height: 50px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
 
 
 
