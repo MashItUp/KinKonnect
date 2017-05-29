@@ -31,13 +31,15 @@ module.exports = function(app,  passport) {
                 console.log('Successfully created personfamily');
             }).catch(function (error) {
                 console.log("Error Message = ", error);
-                throw(error);
+                // throw(error);
+                {res.status(401).json({message: 'Error Message = ', error})};
             });
             console.log("req.user = ", req.user.id);
             res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            throw(eror);
+            // throw(eror);
+            {res.status(401).json({message: 'Error Message = ', error})};
         });
     });
 
@@ -70,16 +72,19 @@ module.exports = function(app,  passport) {
 
                }).catch(function (error) {
                    console.log("Error Message = ", error);
-                   throw(error);
+                   // throw(error);
+                  {res.status(401).json({message: 'Error Message = ', error})};
                });
            }
            else
            {
                console.log("Cannot join family");
+               {res.status(401).json({message: 'Cannot join family - Error secret key/family name '})};
            }
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            throw(error);
+            {res.status(401).json({message: 'Error Message = ', error})};
+//            throw(error);
         });
     });
 
