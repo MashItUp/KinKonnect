@@ -16,7 +16,6 @@ module.exports = function(app,  passport) {
      * process the create family form
      */
     app.post('/api/family/create', isLoggedIn, function(req, res) {
-        var hbsObject = {};
         console.log('create family');
         db.Family.create({
             name: req.body.famname,
@@ -46,7 +45,6 @@ module.exports = function(app,  passport) {
      * process the join family form
      */
     app.post('/api/family/join', isLoggedIn, function(req, res) {
-        var hbsObject = {};
         console.log('join family');
         // verify if family exists and user has correct credentials to join
         db.Family.findOne({
@@ -64,68 +62,24 @@ module.exports = function(app,  passport) {
            {
                //add person to personfamily table
                db.Personfamily.create({
-                   PersonId: req.body.personId,
+                   PersonId: req.user.id,
                    FamilyId: dbfamily.id
                }).then(function (dbPersonFamily) {
-                   // Get user info to send to dashboard handlebars
-                   db.Person.findOne({where: {'id': req.body.personId}}).then(function (dbPerson) {
-                       db.Family.findAll({
-                           include: [
-                               {
-                                   model: db.Personfamily,
-                                   required: true,
-                                   where: {
-                                       PersonId: req.body.personId
-                                   }
-                               }
-                           ]
-                       }).then(function (dbFamily) {
-                           console.log('got to find family');
-                           console.log('dbFamily length = ', dbFamily.length);
-                           if (dbFamily.length === 0) {
-                               hbsObject = {
-                                   person: dbPerson
-                               };
-                           }
-                           else if (dbFamily.length > 1) {
-                               hbsObject = {
-                                   person: dbPerson,
-                                   family: dbFamily
-                               };
-                           }
-                           else {
-                               // family length is 1, look for chatrooms
-                               console.log("Family id = ", dbFamily[0].id);
 
-                               db.ChatRoom.findAll({where: {'FamilyId': dbFamily[0].id}}).then(function (dbChatRoom) {
-                                   console.log('got to find chatroom');
-                                   console.log('dbChatRoom length = ', dbChatRoom.length);
-                                   console.log('dbChatRoom = ', dbChatRoom);
+                   res.redirect('/dashboard');
 
-                                   if (dbChatRoom.length > 0) {
-                                       var hbsObject = {
-                                           person: dbPerson,
-                                           family: dbFamily,
-                                           chatroom: dbChatRoom
-                                       };
-                                   }
-                               });
-                           }
-
-                           res.redirect('/dashboard');
-                       }); // dbFamily
-                   }); // end dbPerson
                }).catch(function (error) {
                    console.log("Error Message = ", error);
-                   return done(null, false, req.flash("createPersonFamilyError", "Error adding to person family"));
+                   throw(error);
                });
            }
-           else {
-               return done(null, false, req.flash("familyFindError", "Invalid Family"));
+           else
+           {
+               console.log("Cannot join family");
            }
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            return done(null, false, req.flash("createFamilyError", error));
+            throw(error);
         });
     });
 
