@@ -40,7 +40,6 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
        app.get('/dashboard', isLoggedIn, function(req,res){
-           var hbsObject = {};
            console.log('got to db.Family.FindAll');
            db.Family.findAll({
                include : [
@@ -60,13 +59,13 @@ module.exports = function(app, passport) {
                console.log('dbFamily length = ', dbFamily.length);
                 if(dbFamily.length === 0)
                 {
-                    hbsObject = {
+                    var hbsObject = {
                         person: req.user
                     };
                 }
                 else if(dbFamily.length > 1)
                 {
-                     hbsObject = {
+                    var hbsObject = {
                         person: req.user,
                         family: dbFamily
                     };
@@ -83,17 +82,17 @@ module.exports = function(app, passport) {
 
                         if(dbChatRoom.length > 0) {
                             console.log("chatroom length > 0");
-                            console.log("dbFamily after json = ", res);
-                            hbsObject = {
+                            //console.log("dbFamily after json = ", res);
+                            var hbsObject = {
                                 person: req.user,
                                 family: dbFamily,
                                 chatroom: dbChatRoom
                             };
-                            console.log('hbsObject = ', hbsObject);
+                            //console.log('after chatroom hbsObject = ', hbsObject);
                         }
                         else
                         { // chatrooms
-                            hbsObject = {
+                            var hbsObject = {
                                 person: req.user,
                                 family: dbFamily
                             };
@@ -101,8 +100,9 @@ module.exports = function(app, passport) {
                         }
                     });
                 }
-               console.log('right before dashboard');
+               console.log('right before rendering dashboard');
                console.log('hbsObject = ', hbsObject);
+               //res.json(hbsObject);
                res.render('dashboard', hbsObject);
            });
        });

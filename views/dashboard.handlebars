@@ -1,14 +1,132 @@
-{{#if ../family}}
-{{!-- they user has family --}}
-    {{#if ../family.count}}
 
-            {{#is ../family length ">" 1}}
-                {{> multifamily}}
-            {{else}}
-                {{> displayfamily}}
-            {{/is}}
+{{#if ../family}}
+    {{#if ../family.count}}
+        <!-- If user has more than 1 family, display multifamily to choose from -->
+        {{#is ../family length ">" 1}}
+            {{> multifamily}}
+        {{else}}
+            <!-- If user only belongs to 1 family, take them straight to dashboard displayfamily -->
+            {{> displayfamily}}
+        {{/is}}
     {{/if}}
 {{else}}
-{{!-- the user doesn't have any family.  Display nofamily.handlebars --}}
+    <!-- nofamily takes you to "Get Started" screen to create or join a family -->
     {{> nofamily}}
 {{/if}}
+
+
+<!-- Navigation -->
+<!-- <nav class="navbar navbar-default">
+    <div class="container-fluid"> -->
+<!-- Brand and toggle get grouped for better mobile display -->
+<!--         <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+        </div> -->
+<!-- Navbar Brand -->
+<!-- <a class="navbar-brand" href="#">Kin Konnect</a> -->
+<!-- Collect the nav links, forms, and other content for toggling -->
+<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+<!-- Dropdown for families -->
+<!-- <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Family Name</a></li>
+        <li><a href="#">Another Family Name</a></li>
+        <li><a href="#">And Another Family Name </a></li>
+      </ul>
+    </li>  End /.dropdown -->
+<!-- Logout -->
+<!--                 <li>
+                    <a href="/logout">Logout</a>
+                </li> End logout
+            </ul> /.navbar-right
+        </div> /.navbar-collapse 
+    </div> /.container
+</nav> -->
+
+<!-- <div id="header">
+    <h2>Add Family Name</h2>
+</div> -->
+
+
+<!-- Main Content -->
+<!-- <div class="maincontent">
+    <div class="col-md-8">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Chatrooms</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/200x100">
+                            <p>Topic 1</p>
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/200x100">
+                            <p>Topic 2</p>
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/200x100">
+                            <p>Topic 3</p>
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/200x100">
+                            <p>Topic 4</p>
+                        </a>
+                    </div> -->
+
+<!-- Add Chatroom Button -->
+<!--                     <button class="btn btn-success" href="/api/chatroom/create">Create Chatroom</button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- Side Bar -->
+<!-- <div class="sidebar">
+    <div class="col-sm-4 col-sm-offset-8">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recent Posts</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Calendar</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Photo Album</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+    </div>
+</div> -->
