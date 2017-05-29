@@ -32,14 +32,14 @@ module.exports = function(app,  passport) {
             }).catch(function (error) {
                 console.log("Error Message = ", error);
                 // throw(error);
-                {res.status(401).json({message: 'Error Message = ', error})};
+                res.status(401).json({message: 'Error Creating Person family'});
             });
             console.log("req.user = ", req.user.id);
             res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // throw(eror);
-            {res.status(401).json({message: 'Error Message = ', error})};
+            res.status(401).json({message: 'Error Creating Person family '});
         });
     });
 
@@ -57,7 +57,8 @@ module.exports = function(app,  passport) {
         }).then(function(dbfamily){
            if(!dbfamily)
            {
-               return done(null, false, req.flash("familyFindError", "Invalid Family"));
+               // return done(null, false, req.flash("familyFindError", "Invalid Family"));
+               res.status(401).json({message: 'Invalid Family '});
            }
            if(dbfamily.name === req.body.famname &&
               dbfamily.secret_key === req.body.secretKey)
@@ -73,17 +74,17 @@ module.exports = function(app,  passport) {
                }).catch(function (error) {
                    console.log("Error Message = ", error);
                    // throw(error);
-                  {res.status(401).json({message: 'Error Message = ', error})};
+                  res.status(401).json({message: 'Error creating person/family'});
                });
            }
            else
            {
                console.log("Cannot join family");
-               {res.status(401).json({message: 'Cannot join family - Error secret key/family name '})};
+              res.status(401).json({message: 'Cannot join family - Error secret key/family name '});
            }
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            {res.status(401).json({message: 'Error Message = ', error})};
+            res.status(401).json({message: 'Error finding family'});
 //            throw(error);
         });
     });
