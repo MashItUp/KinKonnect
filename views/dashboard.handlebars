@@ -1,6 +1,5 @@
 
 {{#if family}}
-    {{#if ../family.count}}
         <!-- If user has more than 1 family, display multifamily to choose from -->
         {{#is ../family length ">" 1}}
             {{> multifamily}}
@@ -8,7 +7,6 @@
             <!-- If user only belongs to 1 family, take them straight to dashboard displayfamily -->
             {{> displayfamily}}
         {{/is}}
-    {{/if}}
 {{else}}
     <!-- nofamily takes you to "Get Started" screen to create or join a family -->
     {{> nofamily}}
