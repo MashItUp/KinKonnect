@@ -16,78 +16,28 @@ module.exports = function(app,  passport) {
      * process the create family form
      */
     app.post('/api/family/create', isLoggedIn, function(req, res) {
-        var hbsObject = {};
         console.log('create family');
         db.Family.create({
             name: req.body.famname,
             secret_key: req.body.secretKey,
-            PersonId: req.body.personId
+            PersonId: req.user.id
         }).then(function (dbFamily) {
             console.log('Successfully created family');
             // update personfamily table
             db.Personfamily.create({
-                PersonId: req.body.personId,
+                PersonId: req.user.id,
                 FamilyId: dbFamily.id
             }).then(function (dbPersonfamily) {
                 console.log('Successfully created personfamily');
             }).catch(function (error) {
                 console.log("Error Message = ", error);
-                return done(null, false, req.flash("createPersonfamilyError", error));
+                throw(error);
             });
-            // Get user info to send to dashboard handlebars
-            db.Person.findOne({ where: {'id' :  req.body.personId }}).then(function(dbPerson) {
-                db.Family.findAll({
-                    include : [
-                        {
-                            model: db.Personfamily,
-                            required: true,
-                            where: {
-                                PersonId: req.body.personId
-                            }
-                        }
-                    ]
-                }).then(function(dbFamily) {
-                    console.log('got to find family');
-                    console.log('dbFamily length = ', dbFamily.length);
-                    if(dbFamily.length === 0)
-                    {
-                        hbsObject = {
-                            person: dbPerson
-                        };
-                    }
-                    else if(dbFamily.length > 1)
-                    {
-                        hbsObject = {
-                            person: dbPerson,
-                            family: dbFamily
-                        };
-                    }
-                    else
-                    {
-                        // family length is 1, look for chatrooms
-                        console.log("Family id = ", dbFamily[0].id);
-
-                        db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
-                            //console.log('got to find chatroom');
-                            //console.log('dbChatRoom length = ', dbChatRoom.length);
-                            //console.log('dbChatRoom = ', dbChatRoom);
-
-                            if(dbChatRoom.length > 0) {
-                                hbsObject = {
-                                    person: dbPerson,
-                                    family: dbFamily,
-                                    chatroom: dbChatRoom
-                                };
-                            }
-                        });
-                    }
-
-                    res.render('dashboard', hbsObject);
-                });
-            });
+            console.log("req.user = ", req.user.id);
+            res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            return done(null, false, req.flash("createFamilyError", error));
+            throw(eror);
         });
     });
 
@@ -95,7 +45,6 @@ module.exports = function(app,  passport) {
      * process the join family form
      */
     app.post('/api/family/join', isLoggedIn, function(req, res) {
-        var hbsObject = {};
         console.log('join family');
         // verify if family exists and user has correct credentials to join
         db.Family.findOne({
@@ -113,79 +62,40 @@ module.exports = function(app,  passport) {
            {
                //add person to personfamily table
                db.Personfamily.create({
-                   PersonId: req.body.personId,
-                   FamilyId: family.id
+                   PersonId: req.user.id,
+                   FamilyId: dbfamily.id
                }).then(function (dbPersonFamily) {
-                   // Get user info to send to dashboard handlebars
-                   db.Person.findOne({where: {'id': req.body.personId}}).then(function (dbPerson) {
-                       db.Family.findAll({
-                           include: [
-                               {
-                                   model: db.Personfamily,
-                                   required: true,
-                                   where: {
-                                       PersonId: req.body.personId
-                                   }
-                               }
-                           ]
-                       }).then(function (dbFamily) {
-                           console.log('got to find family');
-                           console.log('dbFamily length = ', dbFamily.length);
-                           if (dbFamily.length === 0) {
-                               hbsObject = {
-                                   person: dbPerson
-                               };
-                           }
-                           else if (dbFamily.length > 1) {
-                               hbsObject = {
-                                   person: dbPerson,
-                                   family: dbFamily
-                               };
-                           }
-                           else {
-                               // family length is 1, look for chatrooms
-                               console.log("Family id = ", dbFamily[0].id);
 
-                               db.ChatRoom.findAll({where: {'FamilyId': dbFamily[0].id}}).then(function (dbChatRoom) {
-                                   console.log('got to find chatroom');
-                                   console.log('dbChatRoom length = ', dbChatRoom.length);
-                                   console.log('dbChatRoom = ', dbChatRoom);
+                   res.redirect('/dashboard');
 
-                                   if (dbChatRoom.length > 0) {
-                                       var hbsObject = {
-                                           person: dbPerson,
-                                           family: dbFamily,
-                                           chatroom: dbChatRoom
-                                       };
-                                   }
-                               });
-                           }
-
-                           res.render('dashboard', hbsObject);
-                       }); // dbFamily
-                   }); // end dbPerson
                }).catch(function (error) {
                    console.log("Error Message = ", error);
-                   return done(null, false, req.flash("createPersonFamilyError", "Error adding to person family"));
+                   throw(error);
                });
            }
-           else {
-               return done(null, false, req.flash("familyFindError", "Invalid Family"));
+           else
+           {
+               console.log("Cannot join family");
            }
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            return done(null, false, req.flash("createFamilyError", error));
+            throw(error);
         });
     });
 
     /**
      * process get one family
      */
-    app.get('api/family/getone', isLoggedIn, function(req, res) {
+    app.get('/api/family/getone', isLoggedIn, function(req, res) {
+
+        var personId = req.query.personId;
+        var familyId = req.query.familyId;
+
+        console.log('got to getone');
         var hbsObject = {};
-        db.Family.findOne({ where: {'id' :  req.body.familyId }}).then(function(dbFamily) {
-            db.Person.findOne({ where: {'id' : req.body.personId}}).then(function(dbPerson){
-                db.ChatRoom.findAll({ where: {'FamilyId' :  req.body.familyId }}).then(function(dbChatRoom){
+        db.Family.findOne({ where: {'id' :  familyId }}).then(function(dbFamily) {
+            db.Person.findOne({ where: {'id' : personId}}).then(function(dbPerson){
+                db.ChatRoom.findAll({ where: {'FamilyId' :  familyId }}).then(function(dbChatRoom){
                     //console.log('got to find chatroom');
                     //console.log('dbChatRoom length = ', dbChatRoom.length);
                     //console.log('dbChatRoom = ', dbChatRoom);
@@ -204,6 +114,7 @@ module.exports = function(app,  passport) {
                             family: dbFamily
                         };
                     }
+                    console.log('get one family = ', hbsObject);
                     res.render('dashboard', hbsObject);
                 });
             })

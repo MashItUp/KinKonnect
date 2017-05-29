@@ -47,7 +47,7 @@
             <div class="form-group">
                 <select class="form-control" name="familyId" id="family" required="required" aria-required="true" style="width: 300px">
                     <option value="" disabled selected>Select Family</option>
-                    {{#each ../family}}
+                    {{#each family}}
                         <option value={{this.id}}>{{this.name}}</option>
                     {{/each}}
                 </select>

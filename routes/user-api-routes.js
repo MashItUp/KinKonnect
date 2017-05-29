@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-   app.get('/dashboard', isLoggedIn, function(req,res){
+   app.get('/dashboard', isLoggedIn, function(req,res) {
        var hbsObject = {};
        console.log('got to db.Family.FindAll');
        db.Family.findAll({
