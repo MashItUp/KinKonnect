@@ -94,7 +94,7 @@ module.exports = function(app,  passport) {
      */
     app.get('/api/family/getone', isLoggedIn, function(req, res) {
 
-        var personId = req.query.personId;
+        var personId = req.user.id;
         var familyId = req.query.familyId;
 
         console.log('got to getone');
