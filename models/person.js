@@ -42,6 +42,7 @@ module.exports = function(sequelize, DataTypes) {
             {
                 associate: function (models)
                 {
+                    console.log('class method called');
                     // Using additional options like CASCADE etc for demonstration
                     // Can also simply do Task.belongsTo(models.User);
                     Person.hasMany(models.Family,
@@ -58,6 +59,7 @@ module.exports = function(sequelize, DataTypes) {
                                     allowNull: false
                                 }
                         });
+                    Person.hasMany(models.Personfamily)
                 }
             },
         freezeTableName: true

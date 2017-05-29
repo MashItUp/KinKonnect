@@ -40,12 +40,71 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
        app.get('/dashboard', isLoggedIn, function(req,res){
-           console.log('got to dashboard');
-           console.log('req.user = ', req.user);
-           var hbsObject = {
-               user: req.user
-           };
-           res.render('dashboard', hbsObject);
+           var hbsObject = {};
+           console.log('got to db.Family.FindAll');
+           db.Family.findAll({
+               include : [
+                   {
+                       model: db.Personfamily
+                   },
+                   {
+                       model: db.Person,
+                       required: true,
+                       where: {
+                           id: req.user.id
+                       }
+                   }
+               ]
+           }).then(function(dbFamily) {
+               console.log('got to find family');
+               console.log('dbFamily length = ', dbFamily.length);
+                if(dbFamily.length === 0)
+                {
+                    hbsObject = {
+                        person: req.user
+                    };
+                }
+                else if(dbFamily.length > 1)
+                {
+                     hbsObject = {
+                        person: req.user,
+                        family: dbFamily
+                    };
+                }
+                else
+                {
+                    // family length is 1, look for chatrooms
+                    console.log("Family id = ", dbFamily[0].id);
+
+                    db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
+                        //console.log('got to find chatroom');
+                        console.log('dbChatRoom length = ', dbChatRoom.length);
+                        //console.log('dbChatRoom = ', dbChatRoom);
+
+                        if(dbChatRoom.length > 0) {
+                            console.log("chatroom length > 0");
+                            console.log("dbFamily after json = ", res);
+                            hbsObject = {
+                                person: req.user,
+                                family: dbFamily,
+                                chatroom: dbChatRoom
+                            };
+                            console.log('hbsObject = ', hbsObject);
+                        }
+                        else
+                        { // chatrooms
+                            hbsObject = {
+                                person: req.user,
+                                family: dbFamily
+                            };
+                            console.log('hbsObject after chatrooms = ', hbsObject);
+                        }
+                    });
+                }
+               console.log('right before dashboard');
+               console.log('hbsObject = ', hbsObject);
+               res.render('dashboard', hbsObject);
+           });
        });
 
     app.get('/login', function(req, res) {

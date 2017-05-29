@@ -26,6 +26,7 @@ module.exports = function(sequelize, DataTypes) {
                                 },
                             onDelete: 'cascade', hooks:true
                         });
+                    Family.hasMany(models.Personfamily)
                 }
             },
             freezeTableName: true

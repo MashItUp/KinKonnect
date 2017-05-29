@@ -11,25 +11,35 @@
         <a class="navbar-brand" href="#">Kin Konnect</a>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!-- Logout -->
+            <!-- Dropdown for families -->
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Family Name</a></li>
+                        <li><a href="#">Another Family Name</a></li>
+                        <li><a href="#">And Another Family Name </a></li>
+                    </ul>
+                </li> <!-- End /.dropdown -->
+                <!-- Logout -->
                 <li>
                     <a href="/logout">Logout</a>
                 </li> <!-- End logout -->
             </ul> <!-- /.navbar-right -->
-        </div> <!-- /.navbar-collapse --> 
+        </div> <!-- /.navbar-collapse -->
     </div> <!-- /.container -->
 </nav>
 
-<div id="getstartedheader">
-    <h2>Get Started!</h2>
+<div id="header">
+    <h2>Create or Join a Family</h2>
 </div>
 
+
 <!-- Main Content -->
-<div class="nofamilymaincontent">
+<div class="maincontent">
     <div class="col-sm-6 col-sm-offset-3">
 
-        <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Add Your Family</h3>
+        <h1><span class="fa fa-sign-in"></span> Create Family</h1>
 
 
         <!-- CREATE FAMILY FORM -->
@@ -45,7 +55,7 @@
             <div class="form-group">
                 <input type="hidden" name="personId" value={{user.id}}>
             </div>
-            <button type="submit" class="btn btn-warning btn-md">Add</button>
+            <button type="submit" class="btn btn-warning btn-lg">Create Family</button>
         </form>
 
         <hr>
@@ -54,7 +64,7 @@
 
     <div class="col-sm-6 col-sm-offset-3">
 
-        <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Join Your Family</h3>
+        <h1><span class="fa fa-sign-in"></span> Join A Family</h1>
 
 
         <!-- CREATE JOIN FORM -->
@@ -70,7 +80,10 @@
             <div class="form-group">
                 <input type="hidden" name="personId" value={{user.id}}>
             </div>
-            <button type="submit" class="btn btn-warning btn-md">Join</button>
+            <button type="submit" class="btn btn-warning btn-lg">Join Family</button>
         </form>
+
+        <hr>
+
     </div>
 </div>
