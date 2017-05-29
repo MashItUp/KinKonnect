@@ -51,6 +51,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // Need to add the other api-routes here
 require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app, passport);
+require("./routes/family-api-routes.js")(app, passport);
+
 
 
 db.sequelize.sync({ force: false }).then(function() {

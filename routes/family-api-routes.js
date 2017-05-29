@@ -181,11 +181,16 @@ module.exports = function(app,  passport) {
     /**
      * process get one family
      */
-    app.get('api/family/getone', isLoggedIn, function(req, res) {
+    app.get('/api/family/getone', isLoggedIn, function(req, res) {
+
+        var personId = req.query.personId;
+        var familyId = req.query.familyId;
+
+        console.log('got to getone');
         var hbsObject = {};
-        db.Family.findOne({ where: {'id' :  req.body.familyId }}).then(function(dbFamily) {
-            db.Person.findOne({ where: {'id' : req.body.personId}}).then(function(dbPerson){
-                db.ChatRoom.findAll({ where: {'FamilyId' :  req.body.familyId }}).then(function(dbChatRoom){
+        db.Family.findOne({ where: {'id' :  familyId }}).then(function(dbFamily) {
+            db.Person.findOne({ where: {'id' : personId}}).then(function(dbPerson){
+                db.ChatRoom.findAll({ where: {'FamilyId' :  familyId }}).then(function(dbChatRoom){
                     //console.log('got to find chatroom');
                     //console.log('dbChatRoom length = ', dbChatRoom.length);
                     //console.log('dbChatRoom = ', dbChatRoom);
@@ -204,6 +209,7 @@ module.exports = function(app,  passport) {
                             family: dbFamily
                         };
                     }
+                    console.log('get one family = ', hbsObject);
                     res.render('dashboard', hbsObject);
                 });
             })
