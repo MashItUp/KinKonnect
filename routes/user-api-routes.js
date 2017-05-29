@@ -40,9 +40,6 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
        app.get('/dashboard', isLoggedIn, function(req,res){
-           //console.log('got to dashboard');
-           //console.log('req.user = ', req.user);
-           //db.
            console.log('got to db.Family.FindAll');
            db.Family.findAll({
                include : [
@@ -76,18 +73,25 @@ module.exports = function(app, passport) {
             else
             {
                 // family length is 1, look for chatrooms
-                console.log("Family id = ", dbFamily.id);
+                //console.log("Family id = ", dbFamily[0].id);
 
-                db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily.id }}).then(function(dbChatRoom){
-                    console.log('got to find chatroom');
+                db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
+                    //console.log('got to find chatroom');
                     console.log('dbChatRoom length = ', dbChatRoom.length);
-                    console.log('dbChatRoom = ', dbChatRoom);
+                    //console.log('dbChatRoom = ', dbChatRoom);
 
                     if(dbChatRoom.length > 0) {
                         var hbsObject = {
                             person: req.user,
                             family: dbFamily,
                             chatroom: dbChatRoom
+                        }
+                    }
+                    else
+                    { // chatrooms
+                        var hbsObject = {
+                            person: req.user,
+                            family: dbFamily
                         }
                     }
                 });

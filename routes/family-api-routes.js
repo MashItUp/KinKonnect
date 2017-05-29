@@ -12,7 +12,9 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app,  passport) {
 
-    // process the create family form
+    /**
+     * process the create family form
+     */
     app.post('/api/family/create', isLoggedIn, function(req, res) {
         console.log('create family');
         db.Family.create({
@@ -33,27 +35,57 @@ module.exports = function(app,  passport) {
             });
             // Get user info to send to dashboard handlebars
             db.Person.findOne({ where: {'id' :  req.body.personId }}).then(function(dbPerson) {
-                var options = { include:   [  {model:db.Personfamily, as: pf},
-                    {model: db.Family, as: f},
-                    {model: db.Person, as: p}]
-                };
-                options.where = {};
-                options.where.PersonId = req.body.personId;
-
-                db.Family.findAll(options).then(function(dbFamily) {
-                    var options2 = { include:   [  {model:db.Family, as: f},
-                        {model: db.ChatRoom, as: cr}]
-                    };
-                    options.where = cr.FamilyId = f.id;
-
-                    db.ChatRoom.findAll(options2).then(function (dbChatRoom) {
+                db.Family.findAll({
+                    include : [
+                        {
+                            model: db.Personfamily
+                        },
+                        {
+                            model: db.Person,
+                            required: true,
+                            where: {
+                                id: req.body.personId
+                            }
+                        }
+                    ]
+                }).then(function(dbFamily) {
+                    console.log('got to find family');
+                    console.log('dbFamily length = ', dbFamily.length);
+                    if(dbFamily.length === 0)
+                    {
+                        var hbsObject = {
+                            person: dbPerson
+                        };
+                    }
+                    else if(dbFamily.length > 1)
+                    {
                         var hbsObject = {
                             person: dbPerson,
-                            family: dbFamily,
-                            chatroom: dbChatRoom
+                            family: dbFamily
                         };
-                        res.render('dashboard', hbsObject);
-                    });
+                    }
+                    else
+                    {
+                        // family length is 1, look for chatrooms
+                        console.log("Family id = ", dbFamily[0].id);
+
+                        db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
+                            console.log('got to find chatroom');
+                            console.log('dbChatRoom length = ', dbChatRoom.length);
+                            console.log('dbChatRoom = ', dbChatRoom);
+
+                            if(dbChatRoom.length > 0) {
+                                var hbsObject = {
+                                    person: dbPerson,
+                                    family: dbFamily,
+                                    chatroom: dbChatRoom
+                                }
+                            }
+                        });
+                    }
+
+                    res.render('dashboard', hbsObject);
+
                 });
             });
         }).catch(function (error) {
@@ -62,7 +94,9 @@ module.exports = function(app,  passport) {
         });
     });
 
-    // process the join family form
+    /**
+     * process the join family form
+     */
     app.post('/api/family/join', isLoggedIn, function(req, res) {
         console.log('join family');
         // verify if family exists and user has correct credentials to join
@@ -71,23 +105,70 @@ module.exports = function(app,  passport) {
                 name: req.body.famname,
                 secret_key: req.body.secretKey
             }
-        }).then(function(family){
-           if(!family)
+        }).then(function(dbfamily){
+           if(!dbfamily)
            {
                return done(null, false, req.flash("familyFindError", "Invalid Family"));
            }
-           if(family.name === req.body.famname &&
-              family.secret_key === req.body.secretKey)
+           if(dbfamily.name === req.body.famname &&
+              dbfamily.secret_key === req.body.secretKey)
            {
                //add person to personfamily table
                db.Personfamily.create({
                    PersonId: req.body.personId,
                    FamilyId: family.id
                }).then(function (dbPersonFamily) {
-                   res.render('chatroom.ejs', {
-                       familyId : family.id, // get the family id out of session and pass to template
-                       personId: req.body.personId
-                   });
+                   // Get user info to send to dashboard handlebars
+                   db.Person.findOne({where: {'id': req.body.personId}}).then(function (dbPerson) {
+                       db.Family.findAll({
+                           include: [
+                               {
+                                   model: db.Personfamily
+                               },
+                               {
+                                   model: db.Person,
+                                   required: true,
+                                   where: {
+                                       id: req.body.personId
+                                   }
+                               }
+                           ]
+                       }).then(function (dbFamily) {
+                           console.log('got to find family');
+                           console.log('dbFamily length = ', dbFamily.length);
+                           if (dbFamily.length === 0) {
+                               var hbsObject = {
+                                   person: dbPerson
+                               };
+                           }
+                           else if (dbFamily.length > 1) {
+                               var hbsObject = {
+                                   person: dbPerson,
+                                   family: dbFamily
+                               };
+                           }
+                           else {
+                               // family length is 1, look for chatrooms
+                               console.log("Family id = ", dbFamily[0].id);
+
+                               db.ChatRoom.findAll({where: {'FamilyId': dbFamily[0].id}}).then(function (dbChatRoom) {
+                                   console.log('got to find chatroom');
+                                   console.log('dbChatRoom length = ', dbChatRoom.length);
+                                   console.log('dbChatRoom = ', dbChatRoom);
+
+                                   if (dbChatRoom.length > 0) {
+                                       var hbsObject = {
+                                           person: dbPerson,
+                                           family: dbFamily,
+                                           chatroom: dbChatRoom
+                                       }
+                                   }
+                               });
+                           }
+
+                           res.render('dashboard', hbsObject);
+                       }); // dbFamily
+                   }); // end dbPerson
                }).catch(function (error) {
                    console.log("Error Message = ", error);
                    return done(null, false, req.flash("createPersonFamilyError", "Error adding to person family"));
@@ -96,21 +177,39 @@ module.exports = function(app,  passport) {
            else {
                return done(null, false, req.flash("familyFindError", "Invalid Family"));
            }
-
+        }).catch(function (error) {
+            console.log("Error Message = ", error);
+            return done(null, false, req.flash("createFamilyError", error));
         });
     });
 
+    /**
+     * process get one family
+     */
     app.get('api/family/getone', isLoggedIn, function(req, res) {
         db.Family.findOne({ where: {'id' :  req.body.familyId }}).then(function(dbFamily) {
             db.Person.findOne({ where: {'id' : req.body.personId}}).then(function(dbPerson){
-                db.ChatRoom.findAll({}).then(function(dbChatRoom){
-                    var hbsObject = {
-                        person: dbPerson,
-                        family: dbFamily,
-                        chatroom: dbChatRoom
-                    };
+                db.ChatRoom.findAll({ where: {'FamilyId' :  req.body.familyId }}).then(function(dbChatRoom){
+                    //console.log('got to find chatroom');
+                    //console.log('dbChatRoom length = ', dbChatRoom.length);
+                    //console.log('dbChatRoom = ', dbChatRoom);
+
+                    if(dbChatRoom.length > 0) {
+                        var hbsObject = {
+                            person: req.user,
+                            family: dbFamily,
+                            chatroom: dbChatRoom
+                        }
+                    }
+                    else
+                    { // chatrooms
+                        var hbsObject = {
+                            person: req.user,
+                            family: dbFamily
+                        }
+                    }
                     res.render('dashboard', hbsObject);
-                })
+                });
             })
         });
     });
