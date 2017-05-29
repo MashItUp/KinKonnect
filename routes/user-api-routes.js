@@ -40,8 +40,10 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
    app.get('/dashboard', isLoggedIn, function(req,res) {
+       //console.log("req.user = ", req.user);
+       console.log("req.query = ", req.query);
        var hbsObject = {};
-       console.log('got to db.Family.FindAll');
+       //console.log('got to db.Family.FindAll');
        db.Family.findAll({
            include : [
 
@@ -54,8 +56,8 @@ module.exports = function(app, passport) {
                }
            ]
        }).then(function(dbFamily) {
-           console.log('got to find family');
-           console.log('dbFamily length = ', dbFamily.length);
+           //console.log('got to find family');
+           //console.log('dbFamily length = ', dbFamily.length);
            //console.log('dbFamily = ', dbFamily);
             if(dbFamily.length === 0)
             {
@@ -80,18 +82,18 @@ module.exports = function(app, passport) {
 
                 db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
                     //console.log('got to find chatroom');
-                    console.log('dbChatRoom length = ', dbChatRoom.length);
+                    //console.log('dbChatRoom length = ', dbChatRoom.length);
                     //console.log('dbChatRoom = ', dbChatRoom);
 
                     if(dbChatRoom.length > 0) {
-                        console.log("chatroom length > 0");
+                        //console.log("chatroom length > 0");
                         //console.log("dbFamily after json = ", res);
                         hbsObject = {
                             person: req.user,
                             family: dbFamily,
                             chatroom: dbChatRoom
                         };
-                        console.log('after chatroom');
+                        //console.log('after chatroom');
                         //console.log("hbsObject = ",hbsObject);
                         //res.json(hbsObject);
                         res.render('dashboard', hbsObject);
