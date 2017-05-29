@@ -21,73 +21,24 @@ module.exports = function(app,  passport) {
         db.Family.create({
             name: req.body.famname,
             secret_key: req.body.secretKey,
-            PersonId: req.body.personId
+            PersonId: req.user.id
         }).then(function (dbFamily) {
             console.log('Successfully created family');
             // update personfamily table
             db.Personfamily.create({
-                PersonId: req.body.personId,
+                PersonId: req.user.id,
                 FamilyId: dbFamily.id
             }).then(function (dbPersonfamily) {
                 console.log('Successfully created personfamily');
             }).catch(function (error) {
                 console.log("Error Message = ", error);
-                return done(null, false, req.flash("createPersonfamilyError", error));
+                throw(error);
             });
-            // Get user info to send to dashboard handlebars
-            db.Person.findOne({ where: {'id' :  req.body.personId }}).then(function(dbPerson) {
-                db.Family.findAll({
-                    include : [
-                        {
-                            model: db.Personfamily,
-                            required: true,
-                            where: {
-                                PersonId: req.body.personId
-                            }
-                        }
-                    ]
-                }).then(function(dbFamily) {
-                    console.log('got to find family');
-                    console.log('dbFamily length = ', dbFamily.length);
-                    if(dbFamily.length === 0)
-                    {
-                        hbsObject = {
-                            person: dbPerson
-                        };
-                    }
-                    else if(dbFamily.length > 1)
-                    {
-                        hbsObject = {
-                            person: dbPerson,
-                            family: dbFamily
-                        };
-                    }
-                    else
-                    {
-                        // family length is 1, look for chatrooms
-                        console.log("Family id = ", dbFamily[0].id);
-
-                        db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
-                            //console.log('got to find chatroom');
-                            //console.log('dbChatRoom length = ', dbChatRoom.length);
-                            //console.log('dbChatRoom = ', dbChatRoom);
-
-                            if(dbChatRoom.length > 0) {
-                                hbsObject = {
-                                    person: dbPerson,
-                                    family: dbFamily,
-                                    chatroom: dbChatRoom
-                                };
-                            }
-                        });
-                    }
-
-                    res.render('dashboard', hbsObject);
-                });
-            });
+            console.log("req.user = ", req.user.id);
+            res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            return done(null, false, req.flash("createFamilyError", error));
+            throw(eror);
         });
     });
 
@@ -114,7 +65,7 @@ module.exports = function(app,  passport) {
                //add person to personfamily table
                db.Personfamily.create({
                    PersonId: req.body.personId,
-                   FamilyId: family.id
+                   FamilyId: dbfamily.id
                }).then(function (dbPersonFamily) {
                    // Get user info to send to dashboard handlebars
                    db.Person.findOne({where: {'id': req.body.personId}}).then(function (dbPerson) {
@@ -161,7 +112,7 @@ module.exports = function(app,  passport) {
                                });
                            }
 
-                           res.render('dashboard', hbsObject);
+                           res.redirect('/dashboard');
                        }); // dbFamily
                    }); // end dbPerson
                }).catch(function (error) {
