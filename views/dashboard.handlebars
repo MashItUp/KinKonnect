@@ -1,12 +1,12 @@
 
 {{#if family}}
-        <!-- If user has more than 1 family, display multifamily to choose from -->
-        {{#is ../family length ">" 1}}
-            {{> multifamily}}
-        {{else}}
-            <!-- If user only belongs to 1 family, take them straight to dashboard displayfamily -->
+    <!-- If user only belongs to 1 family, take them straight to dashboard displayfamily -->
+        {{#lengthEqual family 1}}
             {{> displayfamily}}
-        {{/is}}
+        {{else}}
+            <!-- If user has more than 1 family, display multifamily to choose from -->
+            {{> multifamily}}
+        {{/lengthEqual}}
 {{else}}
     <!-- nofamily takes you to "Get Started" screen to create or join a family -->
     {{> nofamily}}
