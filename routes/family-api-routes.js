@@ -16,6 +16,7 @@ module.exports = function(app,  passport) {
      * process the create family form
      */
     app.post('/api/family/create', isLoggedIn, function(req, res) {
+        var hbsObject = {};
         console.log('create family');
         db.Family.create({
             name: req.body.famname,
@@ -53,13 +54,13 @@ module.exports = function(app,  passport) {
                     console.log('dbFamily length = ', dbFamily.length);
                     if(dbFamily.length === 0)
                     {
-                        var hbsObject = {
+                        hbsObject = {
                             person: dbPerson
                         };
                     }
                     else if(dbFamily.length > 1)
                     {
-                        var hbsObject = {
+                        hbsObject = {
                             person: dbPerson,
                             family: dbFamily
                         };
@@ -70,22 +71,21 @@ module.exports = function(app,  passport) {
                         console.log("Family id = ", dbFamily[0].id);
 
                         db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
-                            console.log('got to find chatroom');
-                            console.log('dbChatRoom length = ', dbChatRoom.length);
-                            console.log('dbChatRoom = ', dbChatRoom);
+                            //console.log('got to find chatroom');
+                            //console.log('dbChatRoom length = ', dbChatRoom.length);
+                            //console.log('dbChatRoom = ', dbChatRoom);
 
                             if(dbChatRoom.length > 0) {
-                                var hbsObject = {
+                                hbsObject = {
                                     person: dbPerson,
                                     family: dbFamily,
                                     chatroom: dbChatRoom
-                                }
+                                };
                             }
                         });
                     }
 
                     res.render('dashboard', hbsObject);
-
                 });
             });
         }).catch(function (error) {
@@ -98,6 +98,7 @@ module.exports = function(app,  passport) {
      * process the join family form
      */
     app.post('/api/family/join', isLoggedIn, function(req, res) {
+        var hbsObject = {};
         console.log('join family');
         // verify if family exists and user has correct credentials to join
         db.Family.findOne({
@@ -137,12 +138,12 @@ module.exports = function(app,  passport) {
                            console.log('got to find family');
                            console.log('dbFamily length = ', dbFamily.length);
                            if (dbFamily.length === 0) {
-                               var hbsObject = {
+                               hbsObject = {
                                    person: dbPerson
                                };
                            }
                            else if (dbFamily.length > 1) {
-                               var hbsObject = {
+                               hbsObject = {
                                    person: dbPerson,
                                    family: dbFamily
                                };
@@ -161,7 +162,7 @@ module.exports = function(app,  passport) {
                                            person: dbPerson,
                                            family: dbFamily,
                                            chatroom: dbChatRoom
-                                       }
+                                       };
                                    }
                                });
                            }
@@ -187,6 +188,7 @@ module.exports = function(app,  passport) {
      * process get one family
      */
     app.get('api/family/getone', isLoggedIn, function(req, res) {
+        var hbsObject = {};
         db.Family.findOne({ where: {'id' :  req.body.familyId }}).then(function(dbFamily) {
             db.Person.findOne({ where: {'id' : req.body.personId}}).then(function(dbPerson){
                 db.ChatRoom.findAll({ where: {'FamilyId' :  req.body.familyId }}).then(function(dbChatRoom){
@@ -195,18 +197,18 @@ module.exports = function(app,  passport) {
                     //console.log('dbChatRoom = ', dbChatRoom);
 
                     if(dbChatRoom.length > 0) {
-                        var hbsObject = {
+                        hbsObject = {
                             person: req.user,
                             family: dbFamily,
                             chatroom: dbChatRoom
-                        }
+                        };
                     }
                     else
                     { // chatrooms
-                        var hbsObject = {
+                        hbsObject = {
                             person: req.user,
                             family: dbFamily
-                        }
+                        };
                     }
                     res.render('dashboard', hbsObject);
                 });
