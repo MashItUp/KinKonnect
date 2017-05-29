@@ -92,6 +92,7 @@ module.exports = function(app, passport) {
                             chatroom: dbChatRoom
                         };
                         console.log('after chatroom');
+                        //console.log("hbsObject = ",hbsObject);
                         //res.json(hbsObject);
                         res.render('dashboard', hbsObject);
                     }
