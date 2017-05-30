@@ -13,10 +13,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <!-- Right Nav -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                <!-- Add or Join Family -->
-                <a href="">Add/Join Family</a>
-                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Add A New Family</a></li>
+                        <li><a href="#">Join Another Family</a></li>
+                    </ul>
+                </li> <!-- End /.dropdown -->
                 <!-- Logout -->
                 <li>
                     <a href="/logout">Logout</a>
@@ -28,7 +31,7 @@
 
 <div id="getstartedheader">
     {{#each family}}
-    The {{this.name}}'s
+        {{this.name}}
     {{/each}}
 </div>
 
@@ -91,6 +94,69 @@
     </div>
 </div>
 
+<!-- Add A Family Modal -->
+<div class="modal fade" id="addFamilyModal" tabindex="-1" role="dialog" aria-labelledby="addFamilyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" align="center" id="addFamilyModalLabel">Add A Family</h3>
+            </div>
+            <div class="modal-body">
+                <form action="/api/family/create" method="POST">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning btn-md">Create Family</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Join Another Family Modal -->
+<div class="modal fade" id="joinFamilyModal" tabindex="-1" role="dialog" aria-labelledby="joinFamilyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" align="center" id="chatRoomModalLabel">Add Chat Room</h3>
+            </div>
+            <div class="modal-body">
+                <form action="/api/family/create" method="POST">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning btn-md">Create Family</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!-- Side Bar -->
 <div class="sidebar">

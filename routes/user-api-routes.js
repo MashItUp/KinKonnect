@@ -65,6 +65,7 @@ module.exports = function(app, passport) {
 
         db.Family.findAll(options).then(function(dbFamily) {
             console.log('dbFamily length = ', dbFamily.length);
+            console.log('req.user = ', req.user);
             if(dbFamily.length === 0)
             {
                 hbsObject = {
@@ -100,6 +101,7 @@ module.exports = function(app, passport) {
                             person: req.user,
                             family: dbFamily
                         };
+                        console.log('object = ', hbsObject)
                         res.render('dashboard', hbsObject);
                     }
                 });
