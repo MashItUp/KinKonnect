@@ -12,10 +12,6 @@ html, body, .view {
   	margin: 0;
 }
 
-body {
-	background-color: $orange;
-}
-
 #backgroundimage {
 	background-position:   center center;
 	background-repeat:     no-repeat;
@@ -34,18 +30,18 @@ h1 {
 
 #getstartedheader {
 	font-family: $home-font;
-	color: $primary-color;
+	color: $orange;
 	margin: 2% 0% 0% 5%;
 	font-size: 3em;
 }
 
 .form-group {
-	color: $primary-color;
+	color: $brown;
 	font-family: Arial;
 }
 
 .panel-warning {
-	background-color: rgba(115,86,104,0.2); 
+	background-color: rgba(251,165,90,0.5); 
 	
 }
 
