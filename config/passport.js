@@ -121,9 +121,8 @@ module.exports = function(passport) {
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
                 db.Person.findOne({ where: {'email' :  email }}).then(function(user) {
-                    console.log('user email =', user.email);
-                    if (!user.email) {
-                        console.log('user email =', user.email);
+                    console.log('user  =', user);
+                    if (!user) {
                         console.log('login user not found');
                        // return done(null, false, req.flash('loginMessage', 'Invalid Email.')); // req.flash is the way to set flashdata using connect-flash
                         return done(null, false, {message: "Incorrect email or password."});
