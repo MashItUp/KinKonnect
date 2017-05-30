@@ -52,8 +52,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app, passport);
 require("./routes/family-api-routes.js")(app, passport);
-
-
+require("./routes/chat-api-routes.js")(app, passport);
 
 db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
