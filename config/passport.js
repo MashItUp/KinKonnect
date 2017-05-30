@@ -72,8 +72,7 @@ module.exports = function(passport) {
                         if (user)
                         {
                             console.log('user exists = ', user.email);
-                            //return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                            return done(null, false, {message: "That email is already taken."});
+                            return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                         }
                         else
                         {
@@ -91,8 +90,7 @@ module.exports = function(passport) {
                                 return done(null, dbPerson);
                             }).catch(function (error) {
                                 console.log("Error Message = ", error);
-                                return done(null, false, {message: "Incorrect email or password."});
-                                //return done(null, false, req.flash("signupMessage", error));
+                                return done(null, false, req.flash('signupMessage', 'Error creating account.'));
                             });
                         }
                     });
@@ -124,15 +122,13 @@ module.exports = function(passport) {
                     console.log('user  =', user);
                     if (!user) {
                         console.log('login user not found');
-                       // return done(null, false, req.flash('loginMessage', 'Invalid Email.')); // req.flash is the way to set flashdata using connect-flash
-                        return done(null, false, {message: "Incorrect email or password."});
+                        return done(null, false, req.flash('signupMessage', 'User not found.'));
                     }
                     // check to see if theres already a user with that email
                     // if the user is found but the password is wrong
                     if (!isValidPassword(user,password)) {
                         console.log('invalid password');
-                        //return done(null, false, req.flash('loginMessage', 'Invalid Password.')); // create the loginMessage and save it to session as flashdata
-                        return done(null, false, {message: "Incorrect email or password."});
+                        return done(null, false, req.flash('signupMessage', 'Incorrect email or password'));
                     }
                     // all is well, return successful user
                     return done(null, user);
