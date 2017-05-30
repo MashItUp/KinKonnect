@@ -14,18 +14,15 @@ module.exports = function(app, passport) {
         // insert into our table. We pass in an object with text and req.body (complete property)
         db.ChatRoom.create({
             name: req.body.crname,
-            PersonId: req.body.personId,
+            PersonId: req.user.id,
             FamilyId: req.body.familyId
         }).then(function (dbChatroom) {
             console.log('Successfully created chatroom');
-            res.render('/dashboard', {
-                ChatRoomId : dbChatroom.id, // get the family id out of session and pass to template
-                PersonId: req.body.personId
-            });
+            res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // return done(null, false, req.flash("createChatRoomError", error));
-            res.status(401).json({message: 'Error Creating Chat Room '});
+            res.status(401).json({message: 'Error Creating Chat Room x01'});
         });
     });
 
