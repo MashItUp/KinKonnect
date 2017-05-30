@@ -27,6 +27,12 @@
         </div>
         <!-- /.container -->
     </nav>
+
+    <!-- show any messages that come back with authentication -->
+    {{#if message}}
+        <div class="alert alert-danger">{{message}}</div>
+    {{/if}}
+
     <!-- Log In Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
