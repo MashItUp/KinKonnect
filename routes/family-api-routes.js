@@ -22,7 +22,7 @@ module.exports = function(app,  passport) {
             secret_key: req.body.secretKey,
             PersonId: req.user.id
         }).then(function (dbFamily) {
-            console.log('Successfully created family');
+
             // update personfamily table
             db.Personfamily.create({
                 PersonId: req.user.id,
@@ -31,14 +31,12 @@ module.exports = function(app,  passport) {
                 console.log('Successfully created personfamily');
             }).catch(function (error) {
                 console.log("Error Message = ", error);
-                // throw(error);
                 res.status(401).json({message: 'Error Creating Person family'});
             });
             console.log("req.user = ", req.user.id);
             res.redirect('/dashboard');
         }).catch(function (error) {
             console.log("Error Message = ", error);
-            // throw(eror);
             res.status(401).json({message: 'Error Creating Person family '});
         });
     });
@@ -73,7 +71,6 @@ module.exports = function(app,  passport) {
 
                }).catch(function (error) {
                    console.log("Error Message = ", error);
-                   // throw(error);
                   res.status(401).json({message: 'Error creating person/family'});
                });
            }
@@ -85,48 +82,18 @@ module.exports = function(app,  passport) {
         }).catch(function (error) {
             console.log("Error Message = ", error);
             res.status(401).json({message: 'Error finding family'});
-//            throw(error);
         });
     });
 
-    /**
-     * process get one family
-     */
-    app.get('/api/family/getone', isLoggedIn, function(req, res) {
-
-        var familyId = req.query.familyId;
-        console.log('got to getone');
-        console.log('req.query = ', req.query);
-        res.redirect('/dashboard');
-     /*   var hbsObject = {};
-        db.Family.findOne({ where: {'id' :  familyId }}).then(function(dbFamily) {
-                db.ChatRoom.findAll({ where: {'FamilyId' :  familyId }}).then(function(dbChatRoom){
-                    //console.log('got to find chatroom');
-                    //console.log('dbChatRoom length = ', dbChatRoom.length);
-                    //console.log('dbChatRoom = ', dbChatRoom);
-
-                    if(dbChatRoom.length > 0) {
-                        hbsObject = {
-                            person: req.user,
-                            family: dbFamily,
-                            chatroom: dbChatRoom
-                        };
-                    }
-                    else
-                    { // chatrooms
-                        hbsObject = {
-                            person: req.user,
-                            family: dbFamily
-                        };
-                    }
-                    console.log('get one family = ', hbsObject);
-                    //res.render('dashboard', hbsObject);
-                    res.redirect('/dashboard');
-                });
-        }); */
-    });
 };
 
+/**
+ * isLoggedIn
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     console.log('isLoggedIn');

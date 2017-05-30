@@ -39,26 +39,32 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-   app.get('/dashboard', isLoggedIn, function(req,res) {
-       //console.log("req.user = ", req.user);
-       console.log("req.query = ", req.query);
-       var hbsObject = {};
-       //console.log('got to db.Family.FindAll');
-       db.Family.findAll({
-           include : [
+    app.get('/dashboard', isLoggedIn, function(req,res) {
+        //console.log("req.user = ", req.user);
+        console.log("req.query = ", req.query);
+        //if(req.query.familyId)
 
-               {
-                   model: db.Personfamily,
-                   required: true,
-                   where: {
-                       PersonId: req.user.id
-                   }
-               }
-           ]
-       }).then(function(dbFamily) {
-           //console.log('got to find family');
-           //console.log('dbFamily length = ', dbFamily.length);
-           //console.log('dbFamily = ', dbFamily);
+        var hbsObject = {};
+
+        var options = {include : [
+
+            {
+                model: db.Personfamily,
+                required: true,
+                where: {
+                    PersonId: req.user.id
+                }
+            }
+        ]};
+
+        options.where = {};
+
+        if (req.query.familyId){
+            options.where.id = req.query.familyId;
+        }
+
+        db.Family.findAll(options).then(function(dbFamily) {
+            console.log('dbFamily length = ', dbFamily.length);
             if(dbFamily.length === 0)
             {
                 hbsObject = {
@@ -73,7 +79,6 @@ module.exports = function(app, passport) {
                     family: dbFamily
                 };
                 res.render('dashboard', hbsObject);
-                //res.json(hbsObject);
             }
             else
             {
@@ -81,21 +86,12 @@ module.exports = function(app, passport) {
                 console.log("Family id = ", dbFamily[0].id);
 
                 db.ChatRoom.findAll({ where: {'FamilyId' :  dbFamily[0].id }}).then(function(dbChatRoom){
-                    //console.log('got to find chatroom');
-                    //console.log('dbChatRoom length = ', dbChatRoom.length);
-                    //console.log('dbChatRoom = ', dbChatRoom);
-
                     if(dbChatRoom.length > 0) {
-                        //console.log("chatroom length > 0");
-                        //console.log("dbFamily after json = ", res);
                         hbsObject = {
                             person: req.user,
                             family: dbFamily,
                             chatroom: dbChatRoom
                         };
-                        //console.log('after chatroom');
-                        //console.log("hbsObject = ",hbsObject);
-                        //res.json(hbsObject);
                         res.render('dashboard', hbsObject);
                     }
                     else
@@ -104,18 +100,17 @@ module.exports = function(app, passport) {
                             person: req.user,
                             family: dbFamily
                         };
-                        //console.log('hbsObject after chatrooms = ', hbsObject);
                         res.render('dashboard', hbsObject);
                     }
                 });
             }
-       });
-   });
+        });
+    });
 
 
-    /**
-     *
-     */
+    // =====================================
+    // LOGIN  ==============================
+    // =====================================
     app.get('/login', function(req, res) {
         res.redirect('/');
     });
@@ -131,6 +126,13 @@ module.exports = function(app, passport) {
 
 };
 
+/**
+ * isLoggedIn
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     console.log('isLoggedIn');
