@@ -30,9 +30,9 @@
     </div> <!-- /.container -->
 </nav>
 
-<div id="header">
+<div id="getstartedheader">
     {{#each family}}
-    <h2>The {{this.name}}'s</h2>
+    The {{this.name}}'s
     {{/each}}
 </div>
 
@@ -41,7 +41,7 @@
 <div class="maincontent">
     <div class="col-md-8">
         {{#if chatroom}}
-            <div class="panel panel-default">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     <h3 class="panel-title">Chatrooms</h3>
                 </div>
@@ -98,7 +98,7 @@
 <!-- Side Bar -->
 <div class="sidebar">
     <div class="col-sm-4 col-sm-offset-8">
-        <div class="panel panel-default">
+        <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Recent Posts</h3>
             </div>
@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Calendar</h3>
             </div>
@@ -116,7 +116,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Photo Album</h3>
             </div>
