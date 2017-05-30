@@ -4,7 +4,6 @@ var bodyParser = require("body-parser");
 var passport = require('passport');
 var flash    = require('connect-flash');
 var helpers = require('handlebars-helpers')();
-var flash = require('connect-flash');
 
 var morgan   = require('morgan');
 var session      = require('express-session');
