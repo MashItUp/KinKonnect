@@ -37,6 +37,8 @@ var Handlebars = require('handlebars');
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.use(flash());
+
 // required for passport
 app.use(session({
     secret: '2Z7iL8l065Zsc0WT07cu',
