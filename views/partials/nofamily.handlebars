@@ -22,18 +22,42 @@
 </nav>
 
 <div id="getstartedheader">
-    <h2>Get Started!</h2>
+    Get Started!
 </div>
 
 <!-- Main Content -->
 <div class="nofamilymaincontent">
     <div class="col-sm-6 col-sm-offset-3">
 
-        <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Add Your Family</h3>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add Your Family</h3>
+            </div>
+            <div class="panel-body">
+                 <!-- CREATE FAMILY FORM -->
+                <form action="/api/family/create" method="post">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-md">Add</button>
+                </form>
+                
+            </div>
+        </div>
+
+
+        <!-- <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Add Your Family</h3> -->
 
 
         <!-- CREATE FAMILY FORM -->
-        <form action="/api/family/create" method="post">
+        <!-- <form action="/api/family/create" method="post">
             <div class="form-group">
                 <label>Family Name</label>
                 <input type="text" class="form-control" name="famname">
@@ -45,7 +69,7 @@
             <div class="form-group">
             </div>
             <button type="submit" class="btn btn-warning btn-md">Add</button>
-        </form>
+        </form> -->
 
         <hr>
 
@@ -53,11 +77,33 @@
 
     <div class="col-sm-6 col-sm-offset-3">
 
-        <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Join Your Family</h3>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Join Your Family</h3>
+            </div>
+            <div class="panel-body">
+                <!-- CREATE JOIN FORM -->
+                <form action="/api/family/join" method="post">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-md">Join</button>
+                </form>
+                    </div>
+        </div>
+
+        <!-- <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Join Your Family</h3> -->
 
 
         <!-- CREATE JOIN FORM -->
-        <form action="/api/family/join" method="post">
+<!--         <form action="/api/family/join" method="post">
             <div class="form-group">
                 <label>Family Name</label>
                 <input type="text" class="form-control" name="famname">
@@ -69,6 +115,6 @@
             <div class="form-group">
             </div>
             <button type="submit" class="btn btn-warning btn-md">Join</button>
-        </form>
+        </form> -->
     </div>
 </div>
