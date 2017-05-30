@@ -45,43 +45,11 @@
                     <div class="row">
                         {{#each chatroom}}
                             <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
+                                <a href="#" class="thumbnail" name="chatroomId" value="{{this.id}}">
                                     {{this.name}}
                                 </a>
                             </div>
                         {{/each}}
-
-                    <p>Start by creating a chatroom to talk with your family!<p>
-
-                <!--    <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/200x100" alt="...">
-                            Topic 2
-                        </a>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/200x100" alt="...">
-                            Topic 3
-                        </a>
-                    </div>
-
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img src="http://placehold.it/200x100" alt="...">
-                                Topic 3
-                            </a>
-                        </div>
-
-
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img src="http://placehold.it/200x100" alt="...">
-                                Topic 4
-                            </a>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
@@ -108,9 +76,11 @@
                         <label for="crname" class="form-control-label">Chat Room Name</label>
                         <input type="text" class="form-control" id="crname" name="crname">
                     </div>
-                    <div class="form-group">
-                        <input name="familyId" value={{family.id}}>
-                    </div>
+                    {{#each family}}
+                        <div class="form-group">
+                            <input type="hidden" name="familyId" value={{this.id}}>
+                        </div>
+                    {{/each}}
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-warning">Add</button>
                     </div>
