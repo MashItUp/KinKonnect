@@ -27,13 +27,32 @@
 <div class="maincontent">
     <div class="col-md-8">
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Create A Chat Post</div>
             <div class="panel-body">
+
+                <!-- CREATE CHAT POST FORM -->
+                <form action="/api/chatpost/create" method="post">
+                    <div class="form-group">
+                        <label>Chat Body</label>
+                        <input type="text" class="form-control" name="chatbody">
+                    </div>
+                    {{#each chatpost}}
+                        <a href="#" class="thumbnail" name="chatroomId" value="{{this.id}}">
+                            {{this.name}}</a>
+                        <div class="form-group">
+                            <input type="hidden" name="crId" value={{this.id}}>
+                        </div>
+                    {{/each}}                    
+                    <div class="form-group">
+                        <input type="hidden" name="personId" value={{PersonId}}>
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Create Chat Post</button>
+                </form>
+                <hr>
 
             </div>
         </div>
     </div>
-</div>
 
 
 
