@@ -26,15 +26,46 @@
 </div>
 
 <!-- Main Content -->
-<div class="nofamilymaincontent">
-    <div class="col-sm-6 col-sm-offset-3">
+<div class="maincontent">
+    {{#if family}}
+        <div class="col-sm-6 col-sm-offset-3">
+        <!--If they already have multiple families give the option to choose a family-->
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add Your Family</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/dashboard" method="GET">
 
+                        <div class="form-group">
+                            <label for="category">Select Family To Visit:</label>
+
+                            <div class="form-group">
+                                <select class="form-control" name="familyId" id="family" required="required" aria-required="true" style="width: 300px">
+                                    <option value="" disabled selected>Select Family</option>
+                                    {{#each family}}
+                                        <option value={{this.id}}>{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">FAMILY TIME!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
+    <hr>
+
+    <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Add Your Family</h3>
             </div>
             <div class="panel-body">
-                 <!-- CREATE FAMILY FORM -->
+                <!-- CREATE FAMILY FORM -->
                 <form action="/api/family/create" method="post">
                     <div class="form-group">
                         <label>Family Name</label>
@@ -48,35 +79,13 @@
                     </div>
                     <button type="submit" class="btn btn-warning btn-md">Add</button>
                 </form>
-                
             </div>
         </div>
-
-
-        <!-- <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Add Your Family</h3> -->
-
-
-        <!-- CREATE FAMILY FORM -->
-        <!-- <form action="/api/family/create" method="post">
-            <div class="form-group">
-                <label>Family Name</label>
-                <input type="text" class="form-control" name="famname">
-            </div>
-            <div class="form-group">
-                <label>Secret Key</label>
-                <input type="text" class="form-control" name="secretKey">
-            </div>
-            <div class="form-group">
-            </div>
-            <button type="submit" class="btn btn-warning btn-md">Add</button>
-        </form> -->
-
-        <hr>
-
     </div>
 
-    <div class="col-sm-6 col-sm-offset-3">
+    <hr>
 
+    <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Join Your Family</h3>
@@ -98,23 +107,5 @@
                 </form>
             </div>
         </div>
-
-        <!-- <h3 class="nofamilyh3"><span class="fa fa-sign-in"></span>Join Your Family</h3> -->
-
-
-        <!-- CREATE JOIN FORM -->
-<!--         <form action="/api/family/join" method="post">
-            <div class="form-group">
-                <label>Family Name</label>
-                <input type="text" class="form-control" name="famname">
-            </div>
-            <div class="form-group">
-                <label>Secret Key</label>
-                <input type="text" class="form-control" name="secretKey">
-            </div>
-            <div class="form-group">
-            </div>
-            <button type="submit" class="btn btn-warning btn-md">Join</button>
-        </form> -->
     </div>
 </div>
