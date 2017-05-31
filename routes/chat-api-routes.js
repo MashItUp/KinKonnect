@@ -26,6 +26,25 @@ module.exports = function(app, passport) {
         });
     });
 
+//  Create Chat Post (POST Route for Saving Chat Post)
+    app.post('/api/chatpost/create', isLoggedIn, function(req, res) {
+        console.log('create chat post');
+        // create takes an argument of an object describing the items we want to
+        // insert into our table. We pass in an object with text and req.body (complete property)
+        db.ChatPost.create({
+            name: req.body.crname,
+            PersonId: req.user.id,
+            FamilyId: req.body.familyId
+        }).then(function (dbChatpost) {
+            console.log('Successfully created chatpost');
+            res.redirect('/chatroom?PersonId=' + req.body.PersonId);
+        }).catch(function (error) {
+            console.log("Error Message = ", error);
+            // return done(null, false, req.flash("createChatpostError", error));
+            res.status(401).json({message: 'Error Creating Chat Post x01'});
+        });
+    });
+
     // GET route for getting all of the chatrooms
     app.get("/api/chat/all/:crID", function(req, res) {
         // findAll returns all entries for a table when used with no options
