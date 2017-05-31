@@ -1,3 +1,6 @@
+<!-- Background Image -->
+<div class="viewblur" id="backgroundimage" style="background-image:url(../assets/img/dark-gradient.jpg)">
+
 <!-- Navigation -->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -21,24 +24,27 @@
     </div> <!-- /.container -->
 </nav>
 
+<div id="maincontainer">
+
 <div id="getstartedheader">
     Get Started!
 </div>
+
 
 <!-- Main Content -->
 <div class="maincontent">
     {{#if family}}
         <div class="col-sm-6 col-sm-offset-3">
         <!--If they already have multiple families give the option to choose a family-->
-            <div class="panel panel-warning">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Add Your Family</h3>
+                    <h3 class="panel-title">Families</h3>
                 </div>
                 <div class="panel-body">
                     <form action="/dashboard" method="GET">
 
                         <div class="form-group">
-                            <label for="category">Select Family To Visit:</label>
+                            <label for="category">Chat With:</label>
 
                             <div class="form-group">
                                 <select class="form-control" name="familyId" id="family" required="required" aria-required="true" style="width: 300px">
@@ -49,7 +55,7 @@
                                 </select>
                             </div>
 
-                            <button class="btn btn-primary" type="submit">FAMILY TIME!</button>
+                            <button class="btn btn-default" type="submit">FAMILY TIME!</button>
                         </div>
                     </form>
                 </div>
@@ -57,10 +63,9 @@
         </div>
     {{/if}}
 
-    <hr>
 
     <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-warning">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Add Your Family</h3>
             </div>
@@ -77,16 +82,15 @@
                     </div>
                     <div class="form-group">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-md">Add</button>
+                    <button type="submit" class="btn btn-default btn-md">Add</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <hr>
 
     <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-warning">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Join Your Family</h3>
             </div>
@@ -103,9 +107,13 @@
                     </div>
                     <div class="form-group">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-md">Join</button>
+                    <button type="submit" class="btn btn-default btn-md">Join</button>
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+</div>
+
 </div>
