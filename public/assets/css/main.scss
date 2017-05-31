@@ -124,10 +124,6 @@ div.aboutContent {
     }
 }
 
-.btn {
-	margin-left: 15px;
-}
-
 .navbar, .navbar-default {
 	opacity: 0.4;
 }
@@ -141,6 +137,10 @@ div.aboutContent {
 	bottom: 0;
 	width: 100%;
 	padding: 2%;
+}
+
+.modal-footer {
+	margin-top: 25px;
 }
 
 
