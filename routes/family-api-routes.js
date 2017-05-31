@@ -33,8 +33,7 @@ module.exports = function(app,  passport) {
                 console.log("Error Message = ", error);
                 res.status(401).json({message: 'Error Creating Person family'});
             });
-            console.log("req.user = ", req.user.id);
-            res.redirect('/dashboard');
+            res.redirect('/dashboard?familyId=' + dbFamily.id);
         }).catch(function (error) {
             console.log("Error Message = ", error);
             res.status(401).json({message: 'Error Creating Person family '});
@@ -67,7 +66,7 @@ module.exports = function(app,  passport) {
                    FamilyId: dbfamily.id
                }).then(function (dbPersonFamily) {
 
-                   res.redirect('/dashboard');
+                   res.redirect('/dashboard?familyId=' + dbfamily.id);
 
                }).catch(function (error) {
                    console.log("Error Message = ", error);
