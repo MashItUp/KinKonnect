@@ -66,7 +66,7 @@ module.exports = function(app,  passport) {
                    FamilyId: dbfamily.id
                }).then(function (dbPersonFamily) {
 
-                   res.redirect('/dashboard');
+                   res.redirect('/dashboard?familyId=' + dbfamily.id);
 
                }).catch(function (error) {
                    console.log("Error Message = ", error);
