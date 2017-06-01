@@ -106,8 +106,8 @@ module.exports = function(app, passport) {
             console.log("dbChatpost[0].body ", dbChatpost[0].body);
 
                 hbsObject = {
-            
-                    body: dbChatpost.body
+                    chatPost: dbChatpost,
+                    chatRoom: req.query.chatroomId
                 };
                 
                 console.log("hbsObject = ", hbsObject);
