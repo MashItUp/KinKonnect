@@ -27,18 +27,18 @@
 <!-- DISPLAY CHAT POSTS  -->
     <div class="maincontent">
         <div class="col-md-8">
-            {{#if chatpost}}
+            {{#if chatPost}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Chat Posts</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            {{#each chatpost}}
+                            {{#each chatPost}}
                                 <div class="col-xs-6 col-md-3">
                                     <ul>
                                         <li>
-                                            {{this.id}}. {{this.body}} {{this.updatedAt}}
+                                            {{this.id}}.{{this.body}}
                                         </li>
                                     </ul>
                                 </div>
@@ -52,29 +52,29 @@
 
     <div class="maincontent">
         <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">Create A Post</div>
-            <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create A Post</div>
+                <div class="panel-body">
 
-                <!-- CREATE CHAT POST FORM -->
-                <form action="/api/chatpost/create" method="post">
-                    <div class="form-group">
-                        <label for="chatbody" class="form-control-label">Chat Body</label>
-                        <input type="text" class="form-control" name="chatbody">
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="crId" value={{this.id}}>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="personId" value={{PersonId}}>
-                    </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Post It!</button>
-                </form>
-                <hr>
+                    <!-- CREATE CHAT POST FORM -->
+                    <form action="/api/chatpost/create" method="post">
+                        <div class="form-group">
+                            <label for="chatbody" class="form-control-label">Chat Body</label>
+                            <input type="text" class="form-control" name="chatbody">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="crId" value={{this.id}}>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="personId" value={{PersonId}}>
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg">Post It!</button>
+                    </form>
+                    <hr>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <!-- Side Bar -->
 <div class="sidebar">
