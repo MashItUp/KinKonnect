@@ -52,10 +52,7 @@
                         <div class="row">
                             {{#each chatroom}}
                                 <div class="col-xs-6 col-md-3">
-
-                                    <a href="/chatroom" class="thumbnail" name="chatroomId" value="{{this.id}}">
-                                        {{this.name}}
-                                    </a>
+                                    <a href='/chatroom?chatroomId={{this.id}}' class='thumbnail'>{{this.name}}</a>
                                 </div>
                             {{/each}}
                         </div>
