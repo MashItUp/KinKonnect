@@ -1,5 +1,5 @@
 //  Dependencies
-// Requiring our models	
+// Requiring our models 
 var db = require("../models");
 var path = require("path");
 
@@ -46,18 +46,18 @@ module.exports = function(app, passport) {
     });
 
     // GET route for getting all of the chatrooms
-    app.get("/api/chat/all/:crID", function(req, res) {
+    app.get("/api/chat/all/:crID", isLoggedIn, function(req, res) {
         // findAll returns all entries for a table when used with no options
         db.Chatroom.findAll({}).then(function(dbChatroom) {
             console.log("dbChatroom", dbChatroom);
             // We have Chatrooms as an argument inside of the callback function
-            res.json(dbChatroom);
+            res.redirect('/chatroom');
         });
     });
 
     // DELETE route for deleting chatrooms. We can get the id of the chatroom to be deleted from
     // req.params.id
-    app.post("/api/api/chat/delete/:crID", function(req, res) {
+    app.post("/api/api/chat/delete/:crID", isLoggedIn, function(req, res) {
         // We just have to specify which chatroom we want to destroy with "where"
         console.log("Want to destroy crID: ", crID);
         db.Chatroom.destroy({
@@ -70,6 +70,60 @@ module.exports = function(app, passport) {
 
     });
 
+     app.get('/chatroom', isLoggedIn, function(req, res) {
+
+        console.log("MRL req.user = ", req.user);
+        console.log("req: ", req);
+        console.log("MRL req.body: ", req.body, "END OF req.body");
+        console.log("MRL req.query = ", req.query, "END OF req.query");
+        console.log("chatroomId from handlebars: " + req.query.chatroomId);
+
+        var hbsObject = {};
+
+        var options = {include : [
+
+            {
+                model: db.ChatRoom,
+                required: true,
+                where: {
+                    id: req.query.chatroomId
+                }
+            }
+        ]};
+
+        options.where = {};
+
+        if (req.query.chatroomId){
+            options.where.id = req.query.chatroomId;
+        }
+
+        db.ChatPost.findAll(options).then(function(dbChatpost) {
+            console.log('dbChatpost length = ', dbChatpost.length);
+            console.log('req = ', req);
+            if(dbChatpost.length === 0)
+            {
+                hbsObject = {
+                    chatroom: db.chatRoom,
+                    body: dbChatpost.body
+                };
+                res.render('chatroom', hbsObject);
+            }
+            else if(dbChatpost.length > 1)
+            {
+                hbsObject = {
+                    chatroom: db.chatRoom,
+                    body: dbChatpost.body
+                };
+                res.render('chatroom', hbsObject);
+            }
+            else
+            {
+                hbsObject = {
+                };
+                res.render('chatroom', hbsObject);
+            }
+        });
+    });
 };
 
 // route middleware to make sure a user is logged in
