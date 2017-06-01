@@ -33,17 +33,21 @@
                         <h3 class="panel-title">Chat Posts</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
+                        <!-- <div class="row"> -->
                             {{#each chatPost}}
-                                <div class="col-xs-6 col-md-3">
-                                    <ul>
+                                <div class="col-xs-12 col-md-12">
+                                    
+                         <a href='/chatroom?crname={{name}}' class='thumbnail'>{{name}}{{this.body}}</a>
+ <!-- <a href='/chatroom?chatroomId={{this.id}}' class='thumbnail'>{{this.name}}</a> -->
+
+                      <!--               <ul>
                                         <li>
                                             {{this.id}}.{{this.body}}
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             {{/each}}
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             {{/if}}

@@ -99,21 +99,23 @@ module.exports = function(app, passport) {
         db.ChatPost.findAll(options).then(function(dbChatpost) {
         // db.ChatPost.findAll(options).then(function(dbChatpost) {
             console.log('dbChatpost length = ', dbChatpost.length);
-            console.log('req query = ', req.query);
-            console.log('req body = ', req.body);
+            // console.log('req query = ', req.query);
+            // console.log('req body = ', req.body);
             console.log("dbChatpost", dbChatpost);
             console.log("req.query.chatroomId: ", req.query.chatroomId);
-            console.log("dbChatpost[0].body ", dbChatpost[0].body);
 
+            db.ChatRoom.findAll({ where: {'id' :  req.query.chatroomId }}).then(function(dbChatroom){
                 hbsObject = {
-                    chatPost: dbChatpost,
-                    chatRoom: req.query.chatroomId
+                        chatPost: dbChatpost,
+                        chatRoom: dbChatroom
                 };
-                
+                // console.log("dbChatpost.ChatRoom: ", dbChatpost.ChatRoom);
                 console.log("hbsObject = ", hbsObject);
                 res.render('chatroom', hbsObject);
+                })
+            });
         });
-    });
+    // });
 };
 
 // route middleware to make sure a user is logged in
