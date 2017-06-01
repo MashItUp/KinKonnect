@@ -32,7 +32,7 @@
         </div> <!-- /.container -->
     </nav>
 
-    <div id="getstartedheader">
+    <div id="familyname">
         {{#each family}}
             {{this.name}}
         {{/each}}
@@ -42,12 +42,13 @@
     <!-- Main Content -->
     <div class="maincontent">
         <div class="col-md-8">
-            {{#if chatroom}}
+            
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Chatrooms</h3>
+                        <h3 class="panel-title">Chat Rooms</h3>
                     </div>
                     <div class="panel-body">
+                    {{#if chatroom}}
                         <div class="row">
                             {{#each chatroom}}
                                 <div class="col-xs-6 col-md-3">
@@ -58,9 +59,12 @@
                                 </div>
                             {{/each}}
                         </div>
+                    {{else}}
+                    <center><h3>Start communicating by creating a chat room!</h3></center>
+                    {{/if}}
                     </div>
                 </div>
-            {{/if}}
+            
             <!-- Add Chatroom Button -->
             <a href="#" data-toggle="modal" data-target="#chatRoomModal" type="button" class="btn btn-default" data-whatever="@mdo">Create Chat Room</a>
         </div>

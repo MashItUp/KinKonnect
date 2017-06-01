@@ -1,119 +1,115 @@
 <!-- Background Image -->
 <div class="viewblur" id="backgroundimage" style="background-image:url(../assets/img/dark-gradient.jpg)">
 
-<!-- Navigation -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-        </div>
-        <!-- Navbar Brand -->
-        <a class="navbar-brand" href="#">Kin Konnect</a>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!-- Logout -->
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/logout">Logout</a>
-                </li> <!-- End logout -->
-            </ul> <!-- /.navbar-right -->
-        </div> <!-- /.navbar-collapse -->
-    </div> <!-- /.container -->
-</nav>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <!-- Navbar Brand -->
+            <a class="navbar-brand" href="#">Kin Konnect</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- Logout -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li> <!-- End logout -->
+                </ul> <!-- /.navbar-right -->
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container -->
+    </nav> <!-- End Navbar -->
 
-<div id="maincontainer">
+    <div id="getstartedheader">
+        Get Started!
+    </div>
 
-<div id="getstartedheader">
-    Get Started!
-</div>
-
-
-<!-- Main Content -->
-<div class="maincontent">
-    {{#if family}}
-        <div class="col-sm-6 col-sm-offset-3">
-        <!--If they already have multiple families give the option to choose a family-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Families</h3>
-                </div>
-                <div class="panel-body">
-                    <form action="/dashboard" method="GET">
-
-                        <div class="form-group">
-                            <label for="category">Chat With:</label>
+    <!-- Main Content -->
+    <div class="maincontent">
+        {{#if family}}
+            <div class="col-sm-6 col-sm-offset-3">
+            <!--If they already have multiple families give the option to choose a family-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Families</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/dashboard" method="GET">
 
                             <div class="form-group">
-                                <select class="form-control" name="familyId" id="family" required="required" aria-required="true" style="width: 300px">
-                                    <option value="" disabled selected>Select Family</option>
-                                    {{#each family}}
-                                        <option value={{this.id}}>{{this.name}}</option>
-                                    {{/each}}
-                                </select>
-                            </div>
+                                <label for="category">Chat With:</label>
 
-                            <button class="btn btn-default" type="submit">FAMILY TIME!</button>
+                                <div class="form-group">
+                                    <select class="form-control" name="familyId" id="family" required="required" aria-required="true" style="width: 300px">
+                                        <option value="" disabled selected>Select Family</option>
+                                        {{#each family}}
+                                            <option value={{this.id}}>{{this.name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-default" type="submit">FAMILY TIME!</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <!-- End Select Your Family -->
+
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add Your Family</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- CREATE FAMILY FORM -->
+                    <form action="/api/family/create" method="post">
+                        <div class="form-group">
+                            <label>Family Name</label>
+                            <input type="text" class="form-control" name="famname">
                         </div>
+                        <div class="form-group">
+                            <label>Secret Key</label>
+                            <input type="text" class="form-control" name="secretKey">
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-md">Add</button>
                     </form>
                 </div>
             </div>
-        </div>
-    {{/if}}
+        </div> <!-- End Add Your Family -->
 
 
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Add Your Family</h3>
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Join Your Family</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- CREATE JOIN FORM -->
+                    <form action="/api/family/join" method="post">
+                        <div class="form-group">
+                            <label>Family Name</label>
+                            <input type="text" class="form-control" name="famname">
+                        </div>
+                        <div class="form-group">
+                            <label>Secret Key</label>
+                            <input type="text" class="form-control" name="secretKey">
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-md">Join</button>
+                    </form>
+                </div>
             </div>
-            <div class="panel-body">
-                <!-- CREATE FAMILY FORM -->
-                <form action="/api/family/create" method="post">
-                    <div class="form-group">
-                        <label>Family Name</label>
-                        <input type="text" class="form-control" name="famname">
-                    </div>
-                    <div class="form-group">
-                        <label>Secret Key</label>
-                        <input type="text" class="form-control" name="secretKey">
-                    </div>
-                    <div class="form-group">
-                    </div>
-                    <button type="submit" class="btn btn-default btn-md">Add</button>
-                </form>
-            </div>
-        </div>
-    </div>
+        </div> <!-- End Join Your Family -->
+    </div> <!-- End .maincontent -->
 
-
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Join Your Family</h3>
-            </div>
-            <div class="panel-body">
-                <!-- CREATE JOIN FORM -->
-                <form action="/api/family/join" method="post">
-                    <div class="form-group">
-                        <label>Family Name</label>
-                        <input type="text" class="form-control" name="famname">
-                    </div>
-                    <div class="form-group">
-                        <label>Secret Key</label>
-                        <input type="text" class="form-control" name="secretKey">
-                    </div>
-                    <div class="form-group">
-                    </div>
-                    <button type="submit" class="btn btn-default btn-md">Join</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-</div>
-
-</div>
+</div> <!-- End background -->

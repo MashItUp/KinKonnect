@@ -4,7 +4,7 @@ $violet: #735668;
 $black: #000000;
 
 
-html, body, .view {
+html, body, .view, .viewblur {
 	height: 100%;
   	margin: 0;
   	padding: 0;
@@ -44,6 +44,14 @@ h1 {
 	color: $primary-color;
 	margin: 2% 5% 2% 5%;
 	font-size: 3em;
+}
+
+#familyname {
+	font-family: $home-font;
+	color: $primary-color;
+	text-align: center;
+	margin: 2% 5% 2% 5%;
+	font-size: 4em;
 }
 
 .form-group {
