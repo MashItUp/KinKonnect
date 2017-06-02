@@ -15,12 +15,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#loginModal" data-whatever="@mdo">Sign In</a>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#registerModal" data-whatever="@mdo">Register</a>
-                    </li>
+                    {{#if user}}
+                        <li>
+                            <a href="/dashboard">Go to Family Dashboard</a>
+                        </li>
+                    {{else}}
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#loginModal" data-whatever="@mdo">Sign In</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#registerModal" data-whatever="@mdo">Register</a>
+                        </li>
+                    {{/if}}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
