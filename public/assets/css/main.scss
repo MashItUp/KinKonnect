@@ -4,11 +4,15 @@ $violet: #735668;
 $black: #000000;
 
 
-html, body, .view {
+html, body, .view,  {
 	height: 100%;
   	margin: 0;
   	padding: 0;
   	box-sizing: border-box;
+}
+
+.viewblur {
+	height: 930px;
 }
 
 body {
@@ -27,7 +31,6 @@ body {
 	background-repeat:     no-repeat;
 	background-attachment: fixed;
 	background-size:       cover;
-	height: 100%;
 }
 
 h1 {
@@ -171,7 +174,6 @@ div.aboutContent {
 }
 
 .footer {
-	position: absolute;
 	right: 0;
 	bottom: 0;
   	left: 0;
