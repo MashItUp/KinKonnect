@@ -71,15 +71,17 @@
         <!-- CREATE CHAT POST FORM -->
         <form action="/api/chatpost/create" method="POST" class="create-form">
             <div class="form-group">
-            <label for="post">Write Something!</label>
-     <!--        <input type="hidden" name="crId" value={{this.id}}> -->
-                        
-            <textarea id="chat" name="ChatPost" rows="4" cols="40"></textarea>
+                <label for="post">Write Something!</label>
+                {{#each chatRoom}}
+                    <input type="hidden" name="crId" value={{this.id}}>
+                {{/each}}
+
+                <textarea id="chat" name="chatBody" rows="4" cols="40"></textarea>
             </div>
 
             <button type="submit" id="submit" class="btn btn-default btn-md">Submit</button>
-            
-            </form>
+
+        </form>
     </div>
 
     <!-- Side Bar -->

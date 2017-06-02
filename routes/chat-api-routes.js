@@ -28,16 +28,16 @@ module.exports = function(app, passport) {
 
 //  Create Chat Post (POST Route for Saving Chat Post)
     app.post('/api/chatpost/create', isLoggedIn, function(req, res) {
-        console.log('create chat post');
+        console.log('crId = ',req.query.crId );
         // create takes an argument of an object describing the items we want to
         // insert into our table. We pass in an object with text and req.body (complete property)
         db.ChatPost.create({
-            body: req.body.chatbody,
+            body: req.body.chatBody,
             PersonId: req.user.id,
-            ChatRoomId: crId
+            ChatRoomId: req.body.crId
         }).then(function (dbChatpost) {
             console.log('Successfully created chat post');
-            res.redirect('/chatroom?PersonId=' + req.body.PersonId);
+            res.redirect('/chatroom/' + req.body.crId);
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // return done(null, false, req.flash("createChatpostError", error));
@@ -70,12 +70,12 @@ module.exports = function(app, passport) {
 
     });
 
-     app.get('/chatroom', isLoggedIn, function(req, res) {
+    app.get('/chatroom/:crId', isLoggedIn, function(req, res) {
 
 //        console.log("req: ", req);
-    //    console.log("MRL req.body: ", req.body, "END OF req.body");
-      //  console.log("MRL req.query = ", req.query, "END OF req.query");
-        console.log("chatroomId from handlebars: " + req.query.chatroomId);
+        //    console.log("MRL req.body: ", req.body, "END OF req.body");
+        //  console.log("MRL req.query = ", req.query, "END OF req.query");
+        console.log("chatroomId from params: =", req.params.crId);
 
         var hbsObject = {};
 
@@ -85,36 +85,28 @@ module.exports = function(app, passport) {
                 model: db.ChatRoom,
                 // required: false,
                 where: {
-                    id: req.query.chatroomId
+                    id: req.params.crId
                 }
             }
         ]};
 
-        // options.where = {};
-
-        // if (req.query.chatroomId){
-        //     options.where.chatRoomId = req.query.chatroomId;
-        // }
-
         db.ChatPost.findAll(options).then(function(dbChatpost) {
-        // db.ChatPost.findAll(options).then(function(dbChatpost) {
-            console.log('dbChatpost length = ', dbChatpost.length);
-            // console.log('req query = ', req.query);
-            // console.log('req body = ', req.body);
-            console.log("dbChatpost", dbChatpost);
-            console.log("req.query.chatroomId: ", req.query.chatroomId);
+            // db.ChatPost.findAll(options).then(function(dbChatpost) {
+            //console.log('dbChatpost length = ', dbChatpost.length);
+            //console.log("dbChatpost", dbChatpost);
 
-            db.ChatRoom.findAll({ where: {'id' :  req.query.chatroomId }}).then(function(dbChatroom){
+            db.ChatRoom.findAll({ where: {'id' :  req.params.crId }}).then(function(dbChatroom){
+                console.log('dbChatroom = ', dbChatroom);
                 hbsObject = {
-                        chatPost: dbChatpost,
-                        chatRoom: dbChatroom
+                    chatPost: dbChatpost,
+                    chatRoom: dbChatroom
                 };
                 // console.log("dbChatpost.ChatRoom: ", dbChatpost.ChatRoom);
                 console.log("hbsObject = ", hbsObject);
                 res.render('chatroom', hbsObject);
-                })
-            });
+            })
         });
+    });
     // });
 };
 
