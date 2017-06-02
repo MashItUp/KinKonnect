@@ -20,7 +20,7 @@ module.exports = function(app) {
        //res.render('index.html', { message: req.flash('loginMessage') });
         //res.sendFile(path.join(__dirname, "../index.html"));
         //res.render('index'); // load the index.handlebars file
-        res.render('index', { message: req.flash('signupMessage') });
+        res.render('index', { message: req.flash('signupMessage'), user: req.user });
     });
 
 
