@@ -18,7 +18,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Create A New Family</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Add A New Family</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#joinFamilyModal">Join Another Family</a></li>
                         </ul>
                     </li> <!-- End /.dropdown -->
@@ -49,10 +49,13 @@
                     {{#if chatPost}}
                         <div class="chatpost">
                             {{#each chatPost}}
-                                <div class="col-xs-12 col-md-12">     
+                                <div class="col-xs-12 col-md-12">    
                                     <ul>
                                         <li>
                                             {{this.body}}
+
+                                            <br>
+                                            {{this.first_name}}
                                             <br>
                                             {{this.updatedAt}}
                                             <hr>
@@ -71,13 +74,13 @@
         <!-- CREATE CHAT POST FORM -->
         <form action="/api/chatpost/create" method="POST" class="create-form">
             <div class="form-group">
-            <label for="post">Write Something!</label>
+            <label for="POST"></label>
      <!--        <input type="hidden" name="crId" value={{this.id}}> -->
                         
             <textarea id="chat" name="ChatPost" rows="4" cols="40"></textarea>
             </div>
 
-            <button type="submit" id="submit" class="btn btn-default btn-md">Submit</button>
+            <button type="submit" id="submit" class="btn btn-default btn-md">Kin It!</button>
             
             </form>
     </div>
