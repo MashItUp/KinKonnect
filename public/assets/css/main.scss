@@ -173,6 +173,16 @@ div.aboutContent {
 	color: $black;
 }
 
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.postcontent {
+	margin: auto;
+	padding: auto;
+}
+
 .footer {
 	right: 0;
 	bottom: 0;

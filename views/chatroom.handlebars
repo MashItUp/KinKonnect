@@ -1,113 +1,213 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<div class="viewblur" id="backgroundimage" style="background-image:url(../assets/img/dark-gradient.jpg)">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <!-- Navbar Brand -->
+            <a class="navbar-brand" href="/">Kin Konnect</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- Right Nav -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Create A New Family</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#joinFamilyModal">Join Another Family</a></li>
+                        </ul>
+                    </li> <!-- End /.dropdown -->
+                    <!-- Logout -->
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li> <!-- End logout -->
+                </ul> <!-- /.navbar-right -->
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container -->
+    </nav>
+
+    <div id="familyname">
+        {{#each chatRoom}}
+            {{this.name}}
+        {{/each}}
     </div>
-    <!-- /.container -->
-</nav>
 
-<div id="header">
-    <h2>Chatroom Name</h2>
-</div>
 
-<!-- DISPLAY CHAT POSTS  -->
-    <div class="maincontent">
-        <div class="col-md-8">
-            {{#if chatPost}}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Chat Posts</h3>
-                    </div>
+    <!-- DISPLAY CHAT POSTS  -->
+    <div class="chatcontent">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">   
+                    <h3 class="panel-title">Recent Post</h3>
+                </div>
                     <div class="panel-body">
-                        <!-- <div class="row"> -->
+                    {{#if chatPost}}
+                        <div class="chatpost">
                             {{#each chatPost}}
-                                <div class="col-xs-12 col-md-12">
-                                    {{this.body}}{{this.updatedAt}}
-        <!-- <a href='/chatroom?crname={{name}}' class='thumbnail'>{{this.body}}</a> -->
- <!-- <a href='/chatroom?chatroomId={{this.id}}' class='thumbnail'>{{this.name}}</a> -->
-
-                      <!--               <ul>
+                                <div class="col-xs-12 col-md-12">     
+                                    <ul>
                                         <li>
-                                            {{this.id}}.{{this.body}}
+                                            {{this.body}}
+                                            <br>
+                                            {{this.updatedAt}}
+                                            <hr>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
                             {{/each}}
-                        <!-- </div> -->
+                        </div>
+                    {{/if}}
                     </div>
-                </div>
-            {{/if}}
+            </div>
         </div>
     </div>
 
-    <div class="maincontent">
-        <div class="col-md-8">
+    <div class="postcontent" align="center">
+        <!-- CREATE CHAT POST FORM -->
+        <form action="/api/chatpost/create" method="POST" class="create-form">
+            <div class="form-group">
+            <label for="post">Write Something!</label>
+     <!--        <input type="hidden" name="crId" value={{this.id}}> -->
+                        
+            <textarea id="chat" name="ChatPost" rows="4" cols="40"></textarea>
+            </div>
+
+            <button type="submit" id="submit" class="btn btn-default btn-md">Submit</button>
+            
+            </form>
+    </div>
+
+    <!-- Side Bar -->
+    <!-- <div class="sidebar">
+        <div class="col-sm-4 col-sm-offset-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Create A Post</div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recent Posts</h3>
+                </div>
                 <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
 
-                    <!-- CREATE CHAT POST FORM -->
-                    <form action="/api/chatpost/create" method="post">
-                        <div class="form-group">
-                            <label for="chatbody" class="form-control-label">Chat Body</label>
-                            <input type="text" class="form-control" name="chatbody">
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="crId" value={{this.id}}>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="personId" value={{PersonId}}>
-                        </div>
-                        <button type="submit" class="btn btn-warning btn-lg">Post It!</button>
-                    </form>
-                    <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Photo Album</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Calendar</h3>
+                </div>
+                <div class="panel-body">
+                    <iframe id='cv_if5' src='http://cdn.instantcal.com/cvir.html?id=cv_nav5&file=http%3A%2F%2Fwww.instantcal.com%2Ftest.ics&theme=XGY&ccolor=%23ffffc0&dims=1&gtype=cv_monthgrid&gcloseable=0&gnavigable=1&gperiod=month&itype=cv_simpleevent' allowTransparency=true scrolling='no' frameborder=0 height=300 width=375></iframe>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-<!-- Side Bar -->
-<div class="sidebar">
-    <div class="col-sm-4 col-sm-offset-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Recent Posts</h3>
-            </div>
-            <div class="panel-body">
-                Panel content
-            </div>
-        </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Photo Album</h3>
-            </div>
-            <div class="panel-body">
-                Panel content
-            </div>
-        </div>
+</div> <!-- End background -->  
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Calendar</h3>
+<!-- Add Chat Room Modal -->
+<div class="modal fade" id="chatRoomModal" tabindex="-1" role="dialog" aria-labelledby="chatRoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" align="center" id="chatRoomModalLabel">Add Chat Room</h3>
             </div>
-            <div class="panel-body">
-                <iframe id='cv_if5' src='http://cdn.instantcal.com/cvir.html?id=cv_nav5&file=http%3A%2F%2Fwww.instantcal.com%2Ftest.ics&theme=XGY&ccolor=%23ffffc0&dims=1&gtype=cv_monthgrid&gcloseable=0&gnavigable=1&gperiod=month&itype=cv_simpleevent' allowTransparency=true scrolling='no' frameborder=0 height=300 width=375></iframe>
+            <div class="modal-body">
+                <form action="/api/chatroom/create" method="post">
+                    <div class="form-group">
+                        <label for="crname" class="form-control-label">Chat Room Name</label>
+                        <input type="text" class="form-control" id="crname" name="crname">
+                    </div>
+                    {{#each family}}
+                        <div class="form-group">
+                            <input type="hidden" name="familyId" value={{this.id}}>
+                        </div>
+                    {{/each}}
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
 </div>
+
+<!-- Create A Family Modal -->
+<div class="modal fade" id="addFamilyModal" tabindex="-1" role="dialog" aria-labelledby="addFamilyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" align="center" id="addFamilyModalLabel">Create A Family</h3>
+            </div>
+            <div class="modal-body">
+                <form action="/api/family/create" method="POST">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-md">Create Family</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Join Another Family Modal -->
+<div class="modal fade" id="joinFamilyModal" tabindex="-1" role="dialog" aria-labelledby="joinFamilyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" align="center" id="joinFamModalLabel">Join Family</h3>
+            </div>
+            <div class="modal-body">
+                <!-- CREATE JOIN FORM -->
+                <form action="/api/family/join" method="post">
+                    <div class="form-group">
+                        <label>Family Name</label>
+                        <input type="text" class="form-control" name="famname">
+                    </div>
+                    <div class="form-group">
+                        <label>Secret Key</label>
+                        <input type="text" class="form-control" name="secretKey">
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <button type="submit" class="btn btn-default btn-md">Join</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
