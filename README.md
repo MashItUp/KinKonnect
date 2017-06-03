@@ -2,10 +2,10 @@
 
 ### Check out our app here --> https://youtu.be/OvXckIPHMQw
 
-###  KinKonnect is a discussion using MySQL, Node, Express, Handlebars and Sequelize and many more
+###  KinKonnect is a discussion board using MySQL, Node, Express, Handlebars and Sequelize and many more
 ###  technologies and packages, which will be added to the Readme soon.  
-###  Keep in touch with your family through out discussion board.  It's similar to a chat room/chat post, 
-###  but with control over who sees your information.
+###  Keep in touch with your family through our Chat and Post boards.  It is similar to some discussion 
+###  boards, but with control over who sees your information.
 
 ### The User may do the following: (using 'nodemon server.js' from Git Bash or the terminal) 
 
