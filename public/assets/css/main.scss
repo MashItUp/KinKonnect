@@ -107,7 +107,7 @@ a, a:link, a:hover, a:visited, a:active {
 }
 
 p {
-	color: black;
+	color: #7f3dc7;
 	text-align: center;
 	font-size: 1em;
 	margin: auto;
@@ -124,8 +124,10 @@ div.aboutContent {
 	width: 50%;
   	background-color: #ffffff;
   	border: 1px solid black;
-  	opacity: 0.6;
+  	opacity: 0.8;
   	filter: alpha(opacity=60);
+  	border-radius: 20px;
+  	padding: 20px;
 }
 
 #header {
