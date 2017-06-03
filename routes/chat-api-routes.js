@@ -18,7 +18,7 @@ module.exports = function(app, passport) {
             FamilyId: req.body.familyId
         }).then(function (dbChatroom) {
             console.log('Successfully created chat room');
-            res.redirect('/dashboard?familyId=' + req.body.familyId);
+            res.redirect('/dashboard/' + req.body.familyId);
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // return done(null, false, req.flash("createChatRoomError", error));
@@ -65,7 +65,7 @@ module.exports = function(app, passport) {
                 id: req.params.id
             }
         }).then(function(dbChatroom) {
-            res.redirect("/dashboard");
+            res.redirect('/dashboard/' + crID);
         });
 
     });

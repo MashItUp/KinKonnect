@@ -19,14 +19,14 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        console.log('serializeuser');
-        console.log('serial user id = ', user.id);
+        //console.log('serializeuser');
+        //console.log('serial user id = ', user.id);
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        console.log('deserializeUser');
+        //console.log('deserializeUser');
         db.Person.findById(id).then(function(user) {
 
             if (user) {
