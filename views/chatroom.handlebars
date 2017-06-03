@@ -71,7 +71,6 @@
         <!-- CREATE CHAT POST FORM -->
         <form action="/api/chatpost/create" method="POST" class="create-form">
             <div class="form-group">
-                <label for="post">Write Something!</label>
                 {{#each chatRoom}}
                     <input type="hidden" name="crId" value={{this.id}}>
                 {{/each}}
