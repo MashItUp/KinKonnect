@@ -57,20 +57,9 @@
                                 {{/each}}
                             </div>
                         {{else}}
-                            <center><h3>Start communicating by creating a Chat Room!</h3></center>
+                            <center><h3>What's New Fam?</h3></center>
                         {{/if}}
 
-                    {{#if chatroom}}
-                        <div class="row">
-                            {{#each chatroom}}
-                                <div class="col-xs-6 col-md-3">
-                                    <a href='/chatroom?chatroomId={{this.id}}' class='thumbnail'>{{this.name}}</a>
-                                </div>
-                            {{/each}}
-                        </div>
-                    {{else}}
-                    <center><h3>What's New Fam?!</h3></center>
-                    {{/if}}
                     </div>
                 </div>
             
