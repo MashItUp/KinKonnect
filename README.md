@@ -1,3 +1,3 @@
 # KinKonnect
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/euP6k95PC2E" frameborder="0" allowfullscreen></iframe>
+** Check out our app here --> https://youtu.be/euP6k95PC2E
