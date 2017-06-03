@@ -19,7 +19,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Family <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Create A New Family</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#addFamilyModal">Add A New Family</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#joinFamilyModal">Join Another Family</a></li>
                         </ul>
                     </li> <!-- End /.dropdown -->
@@ -45,7 +45,7 @@
             
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Chat Rooms</h3>
+                        <h3 class="panel-title">Kin Up!</h3>
                     </div>
                     <div class="panel-body">
                         {{#if chatroom}}
@@ -60,11 +60,22 @@
                             <center><h3>Start communicating by creating a Chat Room!</h3></center>
                         {{/if}}
 
+                    {{#if chatroom}}
+                        <div class="row">
+                            {{#each chatroom}}
+                                <div class="col-xs-6 col-md-3">
+                                    <a href='/chatroom?chatroomId={{this.id}}' class='thumbnail'>{{this.name}}</a>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{else}}
+                    <center><h3>What's New Fam?!</h3></center>
+                    {{/if}}
                     </div>
                 </div>
             
             <!-- Add Chatroom Button -->
-            <a href="#" data-toggle="modal" data-target="#chatRoomModal" type="button" class="btn btn-default" data-whatever="@mdo">Create Chat Room</a>
+            <a href="#" data-toggle="modal" data-target="#chatRoomModal" type="button" class="btn btn-default" data-whatever="@mdo">Create</a>
         </div>
     </div>
 
@@ -113,12 +124,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title" align="center" id="chatRoomModalLabel">Add Chat Room</h3>
+                <h3 class="modal-title" align="center" id="chatRoomModalLabel">New Topic</h3>
             </div>
             <div class="modal-body">
                 <form action="/api/chatroom/create" method="post">
                     <div class="form-group">
-                        <label for="crname" class="form-control-label">Chat Room Name</label>
+                        <label for="crname" class="form-control-label">Topic Name</label>
                         <input type="text" class="form-control" id="crname" name="crname">
                     </div>
                     {{#each family}}
