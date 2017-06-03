@@ -1,6 +1,6 @@
 # KinKonnect
 
-### Check out our app [here] (https://youtu.be/PAOQ3Y3c2CQ)
+### Check out our app [here](https://youtu.be/PAOQ3Y3c2CQ)
 
 ###  KinKonnect is a discussion board using MySQL, Node, Express, Handlebars and Sequelize and many more
 ###  technologies and packages, which will be added to the Readme soon.  
