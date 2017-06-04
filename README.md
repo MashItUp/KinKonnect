@@ -7,6 +7,10 @@
 ###  Keep in touch with your family through our Chat and Post boards.  It is similar to some discussion 
 ###  boards, but with control over who sees your information.
 
+### This is the initial file structure for our database tables.
+
+######    ![Alt text](public/assets/img/initialStructure.png.png?raw=true "Screenshot A")
+
 ### The User may do the following: (using 'nodemon server.js' from Git Bash or the terminal) 
 
     1.  Bring up the Home Page. Descriptions will be added later. (see Screenshot #1).
@@ -35,4 +39,4 @@
 
     7.  Descriptions will be added later.    (see Screenshot #7)
         
-######   ![Alt text](public/assets/img/threeChatRooms.png?raw=true "Screenshot #7")
+######   ![Alt text](public/assets/img/threeChatRooms.PNG?raw=true "Screenshot #7")
