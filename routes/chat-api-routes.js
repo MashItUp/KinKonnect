@@ -22,7 +22,8 @@ module.exports = function(app, passport) {
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // return done(null, false, req.flash("createChatRoomError", error));
-            res.status(401).json({message: 'Error Creating Chat Room x01'});
+            // res.status(401).json({message: 'Error Creating Chat Room x01'});
+            defer.reject('Error Creating Chat Room - Input may be blank.');
         });
     });
 
@@ -41,12 +42,13 @@ module.exports = function(app, passport) {
         }).catch(function (error) {
             console.log("Error Message = ", error);
             // return done(null, false, req.flash("createChatpostError", error));
-            res.status(401).json({message: 'Error Creating Chat Post x01'});
+            //res.status(401).json({message: 'Error Creating Chat Post x01'});
+            defer.reject('Error Creating Chat Post - Input may be blank.');
         });
     });
 
     // GET route for getting all of the chatrooms
-    app.get("/api/chat/all/:crID", isLoggedIn, function(req, res) {
+    app.get("/api/chat/all/:crId", isLoggedIn, function(req, res) {
         // findAll returns all entries for a table when used with no options
         db.Chatroom.findAll({}).then(function(dbChatroom) {
             console.log("dbChatroom", dbChatroom);
@@ -55,26 +57,22 @@ module.exports = function(app, passport) {
         });
     });
 
-    // DELETE route for deleting chatrooms. We can get the id of the chatroom to be deleted from
-    // req.params.id
-    app.post("/api/api/chat/delete/:crID", isLoggedIn, function(req, res) {
-        // We just have to specify which chatroom we want to destroy with "where"
-        console.log("Want to destroy crID: ", crID);
-        db.Chatroom.destroy({
+    // DELETE route for deleting Chat Posts. We can get the id of the chatroom to be deleted from
+    // req.params.id or possibly the req.body
+    app.post("/api/chatpost/delete/:crId", isLoggedIn, function(req, res) {
+        console.log("req.body: ", req.body, " mrl end");
+        console.log("req.params: ", req.params, " mrl end");
+        console.log("Chat Post Delete/destroy crId: ", crId);
+        db.Chatpost.destroy({
             where: {
-                id: req.params.id
+                id: req.params.crId
             }
-        }).then(function(dbChatroom) {
-            res.redirect('/dashboard/' + crID);
+        }).then(function(dbChatpost) {
+            res.redirect('/chatroom');
         });
-
     });
 
     app.get('/chatroom/:crId', isLoggedIn, function(req, res) {
-
-//        console.log("req: ", req);
-        //    console.log("MRL req.body: ", req.body, "END OF req.body");
-        //  console.log("MRL req.query = ", req.query, "END OF req.query");
         console.log("chatroomId from params: =", req.params.crId);
 
         var hbsObject = {};
@@ -91,10 +89,8 @@ module.exports = function(app, passport) {
         ]};
 
         db.ChatPost.findAll(options).then(function(dbChatpost) {
-            // db.ChatPost.findAll(options).then(function(dbChatpost) {
             //console.log('dbChatpost length = ', dbChatpost.length);
             //console.log("dbChatpost", dbChatpost);
-
             db.ChatRoom.findAll({ where: {'id' :  req.params.crId }}).then(function(dbChatroom){
                 console.log('dbChatroom = ', dbChatroom);
                 hbsObject = {

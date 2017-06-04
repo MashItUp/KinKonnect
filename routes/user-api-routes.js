@@ -158,6 +158,24 @@ module.exports = function(app, passport) {
         });
     });
 
+    // DELETE route for deleting Chat Rooms. We can get the id of the chat room to be deleted from
+    // req.params.id or possibly the req.body
+    app.post("/api/chatroom/delete/:crId", isLoggedIn, function(req, res) {
+        // We just have to specify which chatroom we want to destroy with "where"
+        console.log("req.body.crId: ", req.body.crId);
+        var temp_crId = parseInt(req.body.crId);
+            db.ChatRoom.destroy({
+                where: {
+                    // id: req.body.crId
+                    id: temp_crId
+                }
+            }).then(function(dbChatroom) {
+                // res.redirect('/dashboard');
+                res.redirect('/dashboard');
+                // res.redirect('/dashboard');
+            });
+        // }
+    });
 
 
     // =====================================
